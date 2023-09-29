@@ -49,15 +49,15 @@ public class SongService {
         Optional<Song> optionalSong = songRepository.findById(songId);
         if (optionalSong.isPresent()) {
             Song song = optionalSong.get();
-            song.setTitle(song.getTitle());
-            song.setAlbum(song.getAlbum());
-            song.setGenre(song.getGenre());
-            song.setDuration(song.getDuration());
-            song.setReleaseDate(song.getReleaseDate());
-            song.setPath(song.getPath());
-            song.setCoverArt(song.getCoverArt());
-            song.setPlays(song.getPlays());
-            song.setLikes(song.getLikes());
+            song.setTitle(songRequest.getTitle());
+            song.setAlbum(songRequest.getAlbum());
+            song.setGenre(songRequest.getGenre());
+            song.setDuration(songRequest.getDuration());
+            song.setReleaseDate(songRequest.getReleaseDate());
+            song.setPath(songRequest.getPath());
+            song.setCoverArt(songRequest.getCoverArt());
+            song.setPlays(songRequest.getPlays());
+            song.setLikes(songRequest.getLikes());
             return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
