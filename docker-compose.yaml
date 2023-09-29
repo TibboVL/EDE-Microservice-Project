@@ -1,0 +1,93 @@
+services:
+#database services
+ mongo-user:
+  image: mongo:latest
+  ports:
+    - 27017:27017
+  volumes:
+    - mongodb_user_data:/data/db
+    
+ mongo-library:
+  image: mongo:latest
+  ports:
+    - 27018:27017
+  volumes:
+    - mongodb_library_data:/data/db
+    
+ mongo-playlist:
+  image: mongo:latest
+  ports:
+    - 27019:27017
+  volumes:
+    - mongodb_playlist_data:/data/db
+    
+ mysql-rating:
+  image: mysql:latest
+  ports:
+    - 3300:3306
+  volumes:
+    - mysql_rating_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+#application services
+ user-service:
+  depends_on:
+    - mongo-user
+  image: tibbovl/user-service
+  ports:
+    - 8081:8081
+  links:
+    - mongo-user
+  environment:
+   MONGODB_PORT: 27017
+   MONGODB_HOST: mongo-user
+   
+ library-service:
+  depends_on:
+    - mongo-library
+  image: tibbovl/library-service
+  ports:
+    - 8082:8082
+  links:
+    - mysql-library
+  environment:
+   MONGODB_PORT: 27018
+   MONGODB_HOST: mongo-library
+ playlist-service:
+  depends_on:
+    - mongo-playlist
+  image: tibbovl/playlist-service
+  ports:
+    - 8083:8083
+  links:
+    - mysql-playlist
+  environment:
+   MONGODB_PORT: 27019
+   MONGODB_HOST: mongo-playlist
+
+ rating-service:
+  depends_on:
+    - mysql-rating
+#    - product-service
+#    - inventory-service
+  image: tibbovl/rating-service
+  ports:
+    - 8084:8084
+#  links:
+#    - product-service
+#    - inventory-service
+  environment:
+#   PRODUCT_SERVICE_BASEURL: rating-service:8080
+#   INVENTORY_INFO_SERVICE_BASEURL: rating-service:8082
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-rating
+   MYSQL_DB_PORT: 3300
+
+# persistent storage
+volumes:
+ mongodb_user_data:
+ mongodb_library_data:
+ mongodb_playlist_data:
+ mysql_rating_data:
