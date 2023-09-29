@@ -5,10 +5,14 @@ import fact.it.userservice.dto.UserResponse;
 import fact.it.userservice.model.User;
 import fact.it.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final WebClient webClient;
 
-    public void createUser(UserRequest userRequest) {
+    public ResponseEntity<UserResponse> createUser(UserRequest userRequest) {
         User user = User.builder()
                 .firstname(userRequest.getFirstname())
                 .lastname(userRequest.getLastname())
@@ -27,6 +31,42 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
+        return new ResponseEntity<>(mapToUserResponse(user), HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<UserResponse> getUser(String userId) {
+        Optional<User> optionalRating = userRepository.findById(userId);
+        if (optionalRating.isPresent()) {
+            return new ResponseEntity<>(mapToUserResponse(optionalRating.get()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<UserResponse> updateUser(String userId, UserRequest userRequest) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setFirstname(userRequest.getFirstname());
+            user.setLastname(userRequest.getLastname());
+            user.setUsername(userRequest.getUsername());
+            user.setEmail(userRequest.getEmail());
+            user.setDateOfBirth(userRequest.getDateOfBirth());
+            user.setRegistrationDate(userRequest.getRegistrationDate());
+            return new ResponseEntity<>(mapToUserResponse(optionalUser.get()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<UserResponse> deleteUser(String userId) {
+        Optional<User> optionalRating = userRepository.findById(userId);
+        if (optionalRating.isPresent()) {
+            userRepository.deleteById(userId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     public List<UserResponse> getAllUsers() {

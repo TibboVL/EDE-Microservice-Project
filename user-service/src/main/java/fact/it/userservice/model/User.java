@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Data
 public class User {
-    private Long id;
+    private String id;
     private String firstname;
     private String  lastname;
     private String  username;
