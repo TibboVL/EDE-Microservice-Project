@@ -35,7 +35,7 @@ public class RatingService {
     private RatingResponse mapToOrderLineItem(Rating rating) {
         return RatingResponse.builder()
                 .id(rating.getId())
-                .userId(rating.getId())
+                .userId(rating.getUserId())
                 .songId(rating.getSongId())
                 .rating(rating.getRating())
                 .build();

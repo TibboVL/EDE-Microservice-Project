@@ -20,7 +20,7 @@ public class Song {
     @Id
     private String id;
     private String title;
-    private String artist;
+    private String artistId;
     private String album;
     private Genre genre;
     private Integer duration; // represented in seconds

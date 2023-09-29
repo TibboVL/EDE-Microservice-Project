@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RatingRequest {
-    private Long userId;
-    private Long songId;
+    private String userId;
+    private String songId;
     private Integer rating;
 }

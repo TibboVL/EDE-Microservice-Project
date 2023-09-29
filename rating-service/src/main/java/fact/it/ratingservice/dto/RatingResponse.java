@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RatingResponse {
     private Long id;
-    private Long userId;
-    private Long songId;
+    private String userId;
+    private String songId;
     private Integer rating;
 }

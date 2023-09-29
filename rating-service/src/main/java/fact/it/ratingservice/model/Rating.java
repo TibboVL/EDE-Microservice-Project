@@ -16,7 +16,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long songId;
+    private String userId;
+    private String songId;
     private Integer rating;
 }
