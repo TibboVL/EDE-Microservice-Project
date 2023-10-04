@@ -78,8 +78,9 @@ services:
     - 8083:8083
   links:
     - mysql-playlist
+    - library-service
   environment:
-   LIBRARY_SERVICE_BASEURL: library-service-tibbovl.cloud.okteto.net
+   LIBRARY_SERVICE_BASEURL: library-service:8082
    MONGODB_PORT: 27019
    MONGODB_HOST: mongo-playlist
 
