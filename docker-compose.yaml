@@ -79,6 +79,7 @@ services:
   links:
     - mysql-playlist
   environment:
+   LIBRARY_SERVICE_BASEURL: library-service-tibbovl.cloud.okteto.net
    MONGODB_PORT: 27019
    MONGODB_HOST: mongo-playlist
 
