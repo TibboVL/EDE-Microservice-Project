@@ -12,9 +12,9 @@ services:
     - library-service
     - playlist-service
   environment:
-    USER_SERVICE_BASEURL: user-service:8081
-    LIBRARY_SERVICE_BASEURL: library-service:8082
-    PLAYLIST_SERVICE_BASEURL: playlist-service:8083
+    USER_SERVICE_BASEURL: user-service-tibbovl.cloud.okteto.net
+    LIBRARY_SERVICE_BASEURL: library-service-tibbovl.cloud.okteto.net
+    PLAYLIST_SERVICE_BASEURL: playlist-service-tibbovl.cloud.okteto.net
 #database services
  mongo-user:
   image: mongo:latest

@@ -15,24 +15,50 @@ spring:
         - id: user-service
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users
-#            - Method=GET # let through all traffic
+            - Path=/users/**
           filters:
-            - SetPath=/api/user/
+            - RewritePath=/users/(?<segment>.*), /api/user/${segment}
+
         - id: library-service
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library
-#            - Method=GET # let through all traffic
+            - Path=/library/**
           filters:
-            - SetPath=/api/library/
-        - id: library-service
-          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8082}
+            - RewritePath=/library/(?<segment>.*), /api/library/${segment}
+
+        - id: playlist-service
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
           predicates:
-            - Path=/playlist
-#            - Method=GET # let through all traffic
+            - Path=/playlist/**
           filters:
-            - SetPath=/api/playlist/
+            - RewritePath=/playlist/(?<segment>.*), /api/playlist/${segment}
+
+#        - id: user-service
+#          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+#          predicates:
+#            - Path=/users
+##            - Method=GET # let through all traffic
+#          filters:
+#            - SetPath=/api/user
+#        - id: library-service
+#          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+#          predicates:
+#            - Path=/library
+##            - Method=GET # let through all traffic
+#          filters:
+#            - SetPath=/api/library
+#        - id: playlist-service
+#          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8082}
+#          predicates:
+#            - Path=/playlist
+##            - Method=GET # let through all traffic
+#          filters:
+#            - SetPath=/api/playlist
+
+
+
+
+
 #        - id: product-service
 #          uri: http://${PRODUCT_SERVICE_BASEURL:localhost:8080}
 #          predicates:
