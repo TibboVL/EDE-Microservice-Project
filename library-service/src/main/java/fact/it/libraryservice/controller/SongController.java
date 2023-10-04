@@ -18,6 +18,8 @@ public class SongController {
 
     private final SongService songService;
 
+    // TODO add get ratings endpoint
+
     @PostMapping
     public ResponseEntity<SongResponse> createSong(@RequestBody SongRequest songRequest) {
         return songService.createSong(songRequest);
@@ -42,5 +44,10 @@ public class SongController {
     @GetMapping
     public List<SongResponse> getAllSongs() {
         return songService.getAllSongs();
+    }
+
+    @GetMapping("/dummyData")
+    public ResponseEntity<Long> addDummyData() {
+        return songService.addDummyData();
     }
 }

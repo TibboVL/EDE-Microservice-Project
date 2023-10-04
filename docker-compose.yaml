@@ -1,4 +1,20 @@
 services:
+ api-gateway:
+  depends_on:
+    - user-service
+    - library-service
+    - playlist-service
+  image: tibbovl/api-gateway
+  ports:
+    - 8080:8080
+  links:
+    - user-service
+    - library-service
+    - playlist-service
+  environment:
+    USER_SERVICE_BASEURL: user-service:8081
+    LIBRARY_SERVICE_BASEURL: library-service:8082
+    PLAYLIST_SERVICE_BASEURL: playlist-service:8083
 #database services
  mongo-user:
   image: mongo:latest

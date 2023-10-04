@@ -22,6 +22,11 @@ public class User {
     private String  email;
     private Date dateOfBirth;
     private Date registrationDate;
+
+    // contains the ids of the liked song/playlist
+    // better to just put these into a playlist?
+//    private List<String> likedSongs;
+    private List<String> likedPlaylists;
 //    private List<Long> favoritePlaylists; // List of playlist ids
 //    private Long roleId;
 }

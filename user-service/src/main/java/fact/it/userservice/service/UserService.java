@@ -20,6 +20,28 @@ public class UserService {
     private final UserRepository userRepository;
     private final WebClient webClient;
 
+    public ResponseEntity<Long> addDummyData() {
+        userRepository.deleteAll();
+        int amount = 100;
+        for (int i = 0; i < amount; i++) {
+            UserRequest randomUser = generateRandomUserRequest();
+            createUser(randomUser);
+        }
+        return new ResponseEntity<>(userRepository.count(), HttpStatus.CREATED);
+    }
+    public UserRequest generateRandomUserRequest() {
+        // Implement logic to generate random user data here
+        // For simplicity, you can use a library like Faker to generate random data
+        // Replace the placeholders with actual logic to generate random data
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstname("RandomFirstName");
+        userRequest.setLastname("RandomLastName");
+        userRequest.setUsername("RandomUsername");
+        userRequest.setEmail("random@example.com");
+        userRequest.setDateOfBirth(new Date());
+        return userRequest;
+    }
+
     public ResponseEntity<UserResponse> createUser(UserRequest userRequest) {
         User user = User.builder()
                 .firstname(userRequest.getFirstname())

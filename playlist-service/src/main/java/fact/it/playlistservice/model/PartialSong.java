@@ -1,5 +1,6 @@
 package fact.it.playlistservice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,20 +8,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Document(value = "playlist")
+@Document(value = "partialSong")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class Playlist {
+public class PartialSong {
     @Id
     private String id;
-    private String userId;
-    private String name;
-    private String description;
-    private List<PartialSong> songs; // List of song IDs associated with the playlist (stored as strings)
-
+    private String title;
+    private int duration; // Duration in seconds
 }

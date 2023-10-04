@@ -23,18 +23,32 @@ public class PlaylistController {
         return playlistService.createPlaylist(playlistRequest);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<PlaylistResponse> getPlaylist(@PathVariable("id") String songId) {
-        return playlistService.getPlaylist(songId);
+    public ResponseEntity<PlaylistResponse> getPlaylist(@PathVariable("id") String playlistId) {
+        return playlistService.getPlaylist(playlistId);
+    }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<PlaylistResponse>> getPlaylistFromUser(@PathVariable("id") String userId) {
+        return playlistService.getUserPlaylists(userId);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlaylistResponse> updatePlaylist(@PathVariable("id") String songId, @RequestBody PlaylistRequest playlistRequest) {
-        return playlistService.updatePlaylist(songId, playlistRequest);
+    public ResponseEntity<PlaylistResponse> updatePlaylist(@PathVariable("id") String playlistId, @RequestBody PlaylistRequest playlistRequest) {
+        return playlistService.updatePlaylist(playlistId, playlistRequest);
+    }
+
+    @PutMapping("/{id}/{songId}")
+    public ResponseEntity<PlaylistResponse> addSong(@PathVariable("id") String playlistId, @PathVariable("songId") String songId) {
+        return playlistService.addSong(playlistId, songId);
+    }
+
+    @DeleteMapping("/{id}/{songId}")
+    public ResponseEntity<PlaylistResponse> removeSong(@PathVariable("id") String playlistId, @PathVariable("songId") String songId) {
+        return playlistService.removeSong(playlistId, songId);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<PlaylistResponse> deletePlaylist(@PathVariable("id") String songId) {
-        return playlistService.deletePlaylist(songId);
+    public ResponseEntity<PlaylistResponse> deletePlaylist(@PathVariable("id") String playlistId) {
+        return playlistService.deletePlaylist(playlistId);
     }
 
 

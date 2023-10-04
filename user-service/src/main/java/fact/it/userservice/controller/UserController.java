@@ -44,4 +44,9 @@ public class UserController {
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @GetMapping("/dummyData")
+    public ResponseEntity<Long> addDummyData() {
+        return userService.addDummyData();
+    }
 }

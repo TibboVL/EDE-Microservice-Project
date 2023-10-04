@@ -3,6 +3,7 @@ package fact.it.libraryservice.service;
 
 import fact.it.libraryservice.dto.SongRequest;
 import fact.it.libraryservice.dto.SongResponse;
+import fact.it.libraryservice.model.Genre;
 import fact.it.libraryservice.model.Song;
 import fact.it.libraryservice.repository.SongRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,33 @@ import java.util.Optional;
 public class SongService {
 
     private final SongRepository songRepository;
+
+    public ResponseEntity<Long> addDummyData() {
+        songRepository.deleteAll();
+        int amount = 100;
+        for (int i = 0; i < amount; i++) {
+            SongRequest randomUser = generateRandomSongRequest();
+            createSong(randomUser);
+        }
+        return new ResponseEntity<>(songRepository.count(), HttpStatus.CREATED);
+    }
+    public SongRequest generateRandomSongRequest() {
+        // Implement logic to generate random user data here
+        // For simplicity, you can use a library like Faker to generate random data
+        // Replace the placeholders with actual logic to generate random data
+        SongRequest songRequest = new SongRequest();
+        songRequest.setTitle("Song title");
+        songRequest.setArtist("artistname");
+        songRequest.setGenre(Genre.POP);
+        songRequest.setDuration(100);
+        songRequest.setAlbum("1");
+        songRequest.setLikes(100);
+        songRequest.setReleaseDate(new Date());
+        songRequest.setPlays(1000);
+        songRequest.setPath("test");
+
+        return songRequest;
+    }
 
     public ResponseEntity<SongResponse> createSong(SongRequest songRequest) {
         Song song = Song.builder()
