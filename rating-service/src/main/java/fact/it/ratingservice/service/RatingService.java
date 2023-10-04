@@ -5,11 +5,9 @@ import fact.it.ratingservice.dto.RatingResponse;
 import fact.it.ratingservice.model.Rating;
 import fact.it.ratingservice.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Optional;
