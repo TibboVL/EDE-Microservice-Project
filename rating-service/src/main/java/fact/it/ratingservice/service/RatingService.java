@@ -19,8 +19,6 @@ import java.util.Optional;
 public class RatingService {
 
     private final RatingRepository ratingRepository;
-    private final WebClient webClient;
-
 
     public ResponseEntity<RatingResponse> createRating(RatingRequest ratingRequest) {
         Rating rating = Rating.builder()
