@@ -22,6 +22,17 @@ public class PlaylistController {
     public ResponseEntity<PlaylistResponse> createPlaylist(@RequestBody PlaylistRequest playlistRequest) {
         return playlistService.createPlaylist(playlistRequest);
     }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<String> createMyFavorites(@PathVariable("id") String userId) {
+        return playlistService.createMyFavorites(userId);
+    }
+
+    // hide this endpoint and only allow its creation from inside the user service
+//    @PostMapping
+//    public ResponseEntity<PlaylistResponse> createFavoritePlaylist(@RequestBody PlaylistRequest playlistRequest) {
+//        return playlistService.createFavoritePlaylist(playlistRequest);
+//    }
     @GetMapping("/{id}")
     public ResponseEntity<PlaylistResponse> getPlaylist(@PathVariable("id") String playlistId) {
         return playlistService.getPlaylist(playlistId);

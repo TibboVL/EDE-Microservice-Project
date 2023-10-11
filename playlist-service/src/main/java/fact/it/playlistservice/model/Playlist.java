@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Document(value = "playlist")
@@ -21,6 +20,11 @@ public class Playlist {
     private String userId;
     private String name;
     private String description;
+    private Boolean isPublic;
+
+    private Boolean isFavorite;
+
+    private ListType listType;
     private List<PartialSong> songs; // List of song IDs associated with the playlist (stored as strings)
 
 }

@@ -16,6 +16,9 @@ public class PlaylistResponse {
     private String userId;
     private String name;
     private String description;
+    private boolean isPublic;
+    private Boolean isFavorite;
+
     private List<PartialSong> songs; // List of song IDs associated with the playlist (stored as strings)
 
 }

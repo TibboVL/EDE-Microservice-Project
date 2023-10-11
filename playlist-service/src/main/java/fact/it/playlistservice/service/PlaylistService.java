@@ -34,11 +34,40 @@ public class PlaylistService {
                 .name(playlistRequest.getName())
                 .userId(playlistRequest.getUserId())
                 .description(playlistRequest.getDescription())
+                .isPublic(Boolean.FALSE)
                 .songs(new ArrayList<>())
                 .build();
 
         playlistRepository.save(playlist);
         return new ResponseEntity<>(mapToPlaylistResponse(playlist), HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<String> createMyFavorites(String userId) {
+        List<PlaylistResponse> userPlaylists = getUserPlaylists(userId).getBody();
+
+        boolean hasFavorites = true;
+        if (userPlaylists == null) {
+            hasFavorites = false;
+        } else if (userPlaylists.stream().anyMatch(playlistResponse ->
+                playlistResponse.getIsFavorite() != null && playlistResponse.getIsFavorite())) {
+            hasFavorites = false;
+        }
+
+        // if user has no favorite playlist add one else send forbidden
+        if (!hasFavorites) {
+            Playlist playlist = Playlist.builder()
+                    .name("My favorites")
+                    .userId(userId)
+                    .description("")
+                    .isPublic(false)
+                    .isFavorite(true)
+                    .songs(new ArrayList<>())
+                    .build();
+            playlistRepository.save(playlist);
+            return new ResponseEntity<>(playlist.getId(), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     public ResponseEntity<PlaylistResponse> getPlaylist(String playlistId) {
@@ -65,6 +94,7 @@ public class PlaylistService {
             playlist.setUserId(playlistRequest.getUserId());
             playlist.setName(playlistRequest.getName());
             playlist.setDescription(playlistRequest.getDescription());
+            playlist.setIsPublic(playlistRequest.getIsPublic());
 //            song.setSongIds(playlistRequest.getSongIds());
             return new ResponseEntity<>(mapToPlaylistResponse(optionalPlaylist.get()), HttpStatus.OK);
         } else {
