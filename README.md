@@ -2,10 +2,10 @@
 
 Welcome to the documentation for my Enterprise Development Experience repository. This document provides an overview of the project's services, endpoints, and their connections.
 
-### Services structure
+## Services structure
 
 ![Project diagram](projectDiagram.png)
-### User service
+## User service
 
 This service manages user-related operations, such as user registration, updating user information, and account deletion.
 
@@ -15,7 +15,7 @@ This service manages user-related operations, such as user registration, updatin
 | GET       | - /user/{userId}                         | Retrieve user details by ID.                        |
 | PUT       | - /user/{userId}                         | Update user information.                            |
 | DELETE    | - /user/{userId}                         | Delete a user account.                              |
-### Library service
+## Library service
 
 The Library Service is responsible for managing music and podcast content, including adding, updating, and deleting songs and podcast episodes.
 
@@ -29,7 +29,7 @@ The Library Service is responsible for managing music and podcast content, inclu
 | GET       | - /library/podcasts/{podcastId}             | Retrieve podcast episode details by ID.           |
 | PUT       | - /library/podcasts/{podcastId}             | Update podcast episode information.               |
 | DELETE    | - /library/podcasts/{podcastId}             | Delete a podcast episode from the library.        |
-### Playlist service
+## Playlist service
 
 This service manages user playlists, allowing users to create, update, and delete playlists, and add or remove songs from playlists.
 
@@ -42,9 +42,9 @@ This service manages user playlists, allowing users to create, update, and delet
 | PUT       | - /playlist/{playlistId}/{songId}          | Add a song to playlist.                            |
 | DELETE    | - /playlist/{playlistId}/{songId}           | Remove song from playlist.                         |
 | DELETE    | - /playlist/{playlistId}                   | Delete playlist.                                   |
-### Rating service
+## Rating service
 
-This optional service manages user ratings for songs and podcast episodes.
+This service manages user ratings for songs and podcast episodes.
 
 | Call Type | Endpoints                                   | Comments                                            |
 |-----------|--------------------------------------------|----------------------------------------------------|
