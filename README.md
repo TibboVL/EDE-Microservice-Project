@@ -4,7 +4,7 @@ Welcome to the documentation for the EDE (Your Project Name) repository. This do
 
 ### Services structure
 
-![[EDE project diagram.pdf]]
+![[projectDiagram.png]]
 ### User service
 
 This service manages user-related operations, such as user registration, updating user information, and account deletion.
