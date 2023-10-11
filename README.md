@@ -1,6 +1,6 @@
 # EDE Project Documentation
 
-Welcome to the documentation for the EDE (Your Project Name) repository. This document provides an overview of the project's services, endpoints, and their connections.
+Welcome to the documentation for my Enterprise Development Experience repository. This document provides an overview of the project's services, endpoints, and their connections.
 
 ### Services structure
 
