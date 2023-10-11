@@ -1,4 +1,4 @@
-#EDE Project Documentation
+# EDE Project Documentation
 
 Welcome to the documentation for the EDE (Your Project Name) repository. This document provides an overview of the project's services, endpoints, and their connections.
 
