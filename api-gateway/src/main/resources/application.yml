@@ -9,73 +9,159 @@ logging:
     reactor.netty: TRACE
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLE_CLIENTSECRET}
+            scope: openid,profile,email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   cloud:
     gateway:
       routes:
-        - id: user-service
+        # user service
+        - id: get all users
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/**
+            - Path=/users/all
+            - Method=GET # let through all traffic
           filters:
-            - RewritePath=/users/(?<segment>.*), /api/user/${segment}
+            - SetPath=/api/user/all
+        - id: add dummy users
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/users/dummyData
+            - Method=GET # let through all traffic
+          filters:
+            - SetPath=/api/user/dummyData
+        - id: get-user
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/users/{id}
+            - Method=GET # let through all traffic
+          filters:
+            - SetPath=/api/user/{id}
+        - id: create-user
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/users
+            - Method=POST # let through all traffic
+          filters:
+            - SetPath=/api/user
+        - id: update-user
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/users/{id}
+            - Method=PUT # let through all traffic
+          filters:
+            - SetPath=/api/user/{id}
+        - id: delete-user
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/users/{id}
+            - Method=DELETE # let through all traffic
+          filters:
+            - SetPath=/api/user/{id}
 
-        - id: library-service
+        # library service
+        - id: get all songs
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/**
+            - Path=/library/song
+            - Method=GET # let through all traffic
           filters:
-            - RewritePath=/library/(?<segment>.*), /api/library/${segment}
+            - SetPath=/api/library/song
+        - id: add dummy songs
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/library/song/dummyData
+            - Method=GET # let through all traffic
+          filters:
+            - SetPath=/api/library/song/dummyData
+        - id: get-song
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/library/song/{id}
+            - Method=GET # let through all traffic
+          filters:
+            - SetPath=/api/library/song/{id}
+        - id: create-song
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/library/song
+            - Method=POST # let through all traffic
+          filters:
+            - SetPath=/api/library/song
+        - id: update-song
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/library/song/{id}
+            - Method=PUT # let through all traffic
+          filters:
+            - SetPath=/api/library/song/{id}
+        - id: delete-song
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/library/song/{id}
+            - Method=DELETE # let through all traffic
+          filters:
+            - SetPath=/api/library/song/{id}
 
-        - id: playlist-service
+
+
+        # playlist service
+        - id: get-playlist
           uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
           predicates:
-            - Path=/playlist/**
+            - Path=/playlist/{id}
+            - Method=GET # let through all traffic
           filters:
-            - RewritePath=/playlist/(?<segment>.*), /api/playlist/${segment}
+            - SetPath=/api/playlist/{id}
+        - id: add my favorites playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/{id}
+            - Method=POST # let through all traffic
+          filters:
+            - SetPath=/api/playlist/{id}
+        - id: create-playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist
+            - Method=POST # let through all traffic
+          filters:
+            - SetPath=/api/playlist
+        - id: update-playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/{id}
+            - Method=PUT # let through all traffic
+          filters:
+            - SetPath=/api/playlist/{id}
+        - id: delete-playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/{id}
+            - Method=DELETE # let through all traffic
+          filters:
+            - SetPath=/api/playlist/{id}
 
-#        - id: user-service
-#          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
-#          predicates:
-#            - Path=/users
-##            - Method=GET # let through all traffic
-#          filters:
-#            - SetPath=/api/user
-#        - id: library-service
-#          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
-#          predicates:
-#            - Path=/library
-##            - Method=GET # let through all traffic
-#          filters:
-#            - SetPath=/api/library
-#        - id: playlist-service
-#          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8082}
-#          predicates:
-#            - Path=/playlist
-##            - Method=GET # let through all traffic
-#          filters:
-#            - SetPath=/api/playlist
-
-
-
-
-
-#        - id: product-service
-#          uri: http://${PRODUCT_SERVICE_BASEURL:localhost:8080}
-#          predicates:
-#            - Path=/products
-#            - Method=POST
-#          filters:
-#            - SetPath=/api/product
-#        - id: product-service-all
-#          uri: http://${PRODUCT_SERVICE_BASEURL:localhost:8080}
-#          predicates:
-#            - Path=/products
-#            - Method=GET
-#          filters:
-#            - SetPath=/api/product/all
-#        - id: order-service
-#          uri: http://${ORDER_SERVICE_BASEURL:localhost:8081}
-#          predicates:
-#            - Path=/orders
-#          filters:
-#            - SetPath=/api/order
+        - id: add song to playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/{playlistId}/{songId}
+            - Method=PUT # let through all traffic
+          filters:
+            - SetPath=/api/playlist/{playlistId}/{songId}
+        - id: remove song from playlist
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/{playlistId}/{songId}
+            - Method=DELETE # let through all traffic
+          filters:
+            - SetPath=/api/playlist/{playlistId}/{songId}
