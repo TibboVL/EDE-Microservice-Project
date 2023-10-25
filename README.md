@@ -17,7 +17,7 @@ Serving as a link between various services, the gateway streamlines the user exp
 Examples of URL conversions:
 
 - `http://localhost:8081/api/user/{id}` -> `http://localhost:8080/user/{id}`
-- `http://localhost:8082/api/library/song/{songId}` -> `http://localhost:8080/library/song/{songId}`
+- `http://localhost:8082/api/song/{songId}` -> `http://localhost:8080/library/song/{songId}`
 - `http://localhost:8083/api/playlist/{playlistId}` -> `http://localhost:8080/playlist/{playlistId}`
 - `http://localhost:8084/api/rating/{itemId}` -> `http://localhost:8080/rating/{itemId}`
 
@@ -40,10 +40,10 @@ The Library Service is responsible for managing music and podcast content, inclu
 
 | Call Type | Endpoints                       | Comments                                   | Access without auth |
 | --------- | ------------------------------- | ------------------------------------------ | ------------------- |
-| POST      | `/library/song`                 | Add a new song to the library.             | No |
-| GET       | `/library/song/{songId}`        | Retrieve song details by ID.               | Yes |
-| PUT       | `/library/song/{songId}`        | Update song information.                   | No |
-| DELETE    | `/library/song/{songId}`        | Delete a song from the library.            | No |
+| POST      | `/song`                 | Add a new song to the library.             | No |
+| GET       | `/song/{songId}`        | Retrieve song details by ID.               | Yes |
+| PUT       | `/song/{songId}`        | Update song information.                   | No |
+| DELETE    | `/song/{songId}`        | Delete a song from the library.            | No |
 <!---| POST      | `/library/podcasts`             | Add a new podcast episode to the library.  | No |
 | GET       | `/library/podcasts/{podcastId}` | Retrieve podcast episode details by ID.    | No |
 | PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | No |
