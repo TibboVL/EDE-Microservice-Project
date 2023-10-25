@@ -29,10 +29,10 @@ This service manages user-related operations, such as user registration, updatin
 
 | Mapping | Endpoints        | Comments                     | Requires Auth |
 | ------- | ---------------- | ---------------------------- | ------------- |
-| POST    | `/user`          | Create a new user.           | No            |
-| GET     | `/user/{userId}` | Retrieve user details by ID. | No            |
-| PUT     | `/user/{userId}` | Update user information.     | No            |
-| DELETE  | `/user/{userId}` | Delete a user account.       | No            |
+| POST    | `/user`          | Create a new user.           | Yes            |
+| GET     | `/user/{userId}` | Retrieve user details by ID. | Yes            |
+| PUT     | `/user/{userId}` | Update user information.     | Yes            |
+| DELETE  | `/user/{userId}` | Delete a user account.       | Yes            |
 
 ### Library service
 
