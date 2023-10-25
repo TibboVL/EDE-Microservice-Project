@@ -34,11 +34,10 @@ The Library Service is responsible for managing music and podcast content, inclu
 | GET       | `/library/song/{songId}`        | Retrieve song details by ID.               | Yes |
 | PUT       | `/library/song/{songId}`        | Update song information.                   | No |
 | DELETE    | `/library/song/{songId}`        | Delete a song from the library.            | No |
-[//]: # (
-| POST      | `/library/podcasts`             | Add a new podcast episode to the library.  | No |
+<!---| POST      | `/library/podcasts`             | Add a new podcast episode to the library.  | No |
 | GET       | `/library/podcasts/{podcastId}` | Retrieve podcast episode details by ID.    | No |
 | PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | No |
-| DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | No |)
+| DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | No |-->
 
 ### Playlist service
 
