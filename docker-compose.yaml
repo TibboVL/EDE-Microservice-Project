@@ -70,11 +70,12 @@ services:
   links:
     - mysql-library
     - playlist-service
+    - rating-service
   environment:
    MONGODB_PORT: 27018
    MONGODB_HOST: mongo-library
    PLAYLIST_SERVICE_BASEURL: playlist-service-tibbovl.cloud.okteto.net
-   RATING: rating-service-tibbovl.cloud.okteto.net
+   RATING_SERVICE_BASEURL: rating-service-tibbovl.cloud.okteto.net
  playlist-service:
   depends_on:
     - mongo-playlist
