@@ -11,6 +11,8 @@ My EDE project centers around a music service, featuring functionalities such as
 
 ![Project diagram](projectDiagram.png)
 
+### Gateway
+
 ### User service
 
 This service manages user-related operations, such as user registration, updating user information, and account deletion.
@@ -61,3 +63,6 @@ This service manages user ratings for songs and podcast episodes.
 | GET       | - /rating/{itemId} | Retrieve ratings for a specific item. |
 | PUT       | - /rating/{itemId} | Update a rating for an item.          |
 | DELETE    | - /rating/{itemId} | Delete a rating for an item.          |
+
+## My expansions
+> test
