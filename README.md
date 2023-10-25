@@ -78,7 +78,7 @@ This service manages user playlists, allowing users to create, update, and delet
 | DELETE    | `/playlist/{playlistId}/{songId}` | Remove song from playlist. | Yes |
 | DELETE    | `/playlist/{playlistId}`          | Delete playlist.           | Yes |
 
-The playlist service has a hidden endpoint for the Library service to utilize when adding a song.
+The playlist service has a hidden endpoint for the Library service to utilize when updating a song.
 
 | Mapping | Endpoints                     | Used by | Comments | Requires Auth |
 | ------- | ----------------------------- | ------- | -------- | ------------- |
