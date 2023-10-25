@@ -52,6 +52,18 @@ The Library Service is responsible for managing music and podcast content, inclu
 | PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | Yes |
 | DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | Yes |-->
 
+The Library service utilizes the Playlist services hidden endpoint to update partial songs in case a song's information changes.
+
+| Mapping | Endpoints              | Uses    | Comments | Requires Auth |
+| ------- | ---------------------- | ------- | -------- | ------------- |
+| PUT     | `/song/{songId}`       | -       | PUT      | `/playlist/updatePartialSongs` | Special non-public method used by the library to update partial song data if a song were to get updated | Not accessible |
+
+The Library service utilizes the Rating service to retrieve the average rating when returning a song's information.
+
+| Mapping | Endpoints          | Uses   | Comments | Requires Auth |
+| ------- | ------------------ | ------ | -------- | ------------- |
+| GET     | `/song/{songId}`    | -      | GET     | `/rating/{songId}/average-rating` | When adding a song to a playlist, the service will ask the library service about its existence and some details about it.
+
 ### Playlist service
 
 This service manages user playlists, allowing users to create, update, and delete playlists, and add or remove songs from playlists.
@@ -66,6 +78,12 @@ This service manages user playlists, allowing users to create, update, and delet
 | DELETE    | `/playlist/{playlistId}/{songId}` | Remove song from playlist. | Yes |
 | DELETE    | `/playlist/{playlistId}`          | Delete playlist.           | Yes |
 
+The playlist service has a hidden endpoint for the Library service to utilize when adding a song.
+
+| Mapping | Endpoints                     | Used by | Comments | Requires Auth |
+| ------- | ----------------------------- | ------- | -------- | ------------- |
+| PUT     | `/playlist/updatePartialSongs` | -       | PUT     | `/song/{songId}` | Special non-public method used by the library to update partial song data if a song were to get  
+
 ### Rating service
 
 This service manages user ratings for songs and podcast episodes.
@@ -76,6 +94,12 @@ This service manages user ratings for songs and podcast episodes.
 | GET     | - `/rating/{itemId}` | Retrieve ratings for a specific item. | Yes            |
 | PUT     | - `/rating/{itemId}` | Update a rating for an item.          | Yes            |
 | DELETE  | - `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
+
+The Rating service has a hidden endpoint for the Library service to retrieve the average rating.
+
+| Mapping | Endpoints                      | Used by | Comments | Requires Auth |
+| ------- | ----------------------------- | ------- | -------- | ------------- |
+| GET     | - `/rating/{songId}/average-rating`| PUT    | `/playlist/{playlistId}/{songId}` | Used by the library service to retrieve the average rating for a song. | Not accessible |
 
 
 ## My expansions
