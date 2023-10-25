@@ -73,42 +73,42 @@ spring:
         - id: get all songs
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song
+            - Path=/song/all
             - Method=GET 
           filters:
-            - SetPath=/api/library/song
+            - SetPath=/api/library/song/all
         - id: add dummy songs
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song/dummyData
+            - Path=/song/dummyData
             - Method=GET 
           filters:
             - SetPath=/api/library/song/dummyData
         - id: get-song
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song/{id}
+            - Path=/song/{id}
             - Method=GET 
           filters:
             - SetPath=/api/library/song/{id}
         - id: create-song
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song
+            - Path=/song
             - Method=POST 
           filters:
             - SetPath=/api/library/song
         - id: update-song
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song/{id}
+            - Path=/song/{id}
             - Method=PUT 
           filters:
             - SetPath=/api/library/song/{id}
         - id: delete-song
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
-            - Path=/library/song/{id}
+            - Path=/song/{id}
             - Method=DELETE 
           filters:
             - SetPath=/api/library/song/{id}

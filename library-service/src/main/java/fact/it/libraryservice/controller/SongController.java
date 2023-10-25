@@ -41,7 +41,7 @@ public class SongController {
     }
 
     // dev purposes
-    @GetMapping
+    @GetMapping("/all")
     public List<SongResponse> getAllSongs() {
         return songService.getAllSongs();
     }

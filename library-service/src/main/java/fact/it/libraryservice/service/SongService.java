@@ -90,7 +90,7 @@ public class SongService {
             } catch (WebClientResponseException.NotFound e) {
                 // handle the 404 error here
                 // just return null for the average and handle it client side to not display
-                return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.OK);
             }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
