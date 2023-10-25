@@ -2,6 +2,7 @@ package fact.it.playlistservice.controller;
 
 import fact.it.playlistservice.dto.PlaylistRequest;
 import fact.it.playlistservice.dto.PlaylistResponse;
+import fact.it.playlistservice.dto.SongResponse;
 import fact.it.playlistservice.service.PlaylistService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -45,6 +46,11 @@ public class PlaylistController {
     @PutMapping("/{id}")
     public ResponseEntity<PlaylistResponse> updatePlaylist(@PathVariable("id") String playlistId, @RequestBody PlaylistRequest playlistRequest) {
         return playlistService.updatePlaylist(playlistId, playlistRequest);
+    }
+
+    @PutMapping("/updatePartialSongs")
+    public ResponseEntity<?> updatePlaylist(@RequestBody SongResponse songResponse) {
+        return playlistService.updatePartialSongs(songResponse);
     }
 
     @PutMapping("/{id}/{songId}")

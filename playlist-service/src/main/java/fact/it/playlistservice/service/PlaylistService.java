@@ -17,6 +17,8 @@
     import java.util.List;
     import java.util.Optional;
 
+    import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
+
     @Service
     @RequiredArgsConstructor
     public class PlaylistService {
@@ -112,9 +114,9 @@
                 // check for a 404 reply
                 if (optionalSong != null) {
                     PartialSong partialSong = PartialSong.builder()
-                            .id(optionalSong.getId())
                             .title(optionalSong.getTitle())
                             .duration(optionalSong.getDuration())
+                            .songId(optionalSong.getId())
                             .build();
                     Playlist playlist = optionalPlaylist.get();
                     playlist.getSongs().add(partialSong);
@@ -128,15 +130,36 @@
             }
         }
 
-        /// webclient gebruiken voor ratings
-        /// webclient gebruiker voor song update door te voeren in playlist partial songs
+        /// gets called by library service when a songs title or duration gets updated
+        public ResponseEntity<?> updatePartialSongs(SongResponse songResponse) {
+            // get all playlists
+            // in each playlist get its partial songs and start a new stream
+            // get the partial songs that match the updating songId
+            // update the data of the partial song
+            List<Playlist> playlists = playlistRepository.findAll().stream()
+                    .peek(playlist -> {
+                        List<PartialSong> songs = playlist.getSongs();
+                        if (songs != null) {
+                            songs.stream()
+                            .filter(partialSong -> partialSong.getSongId().equals(songResponse.getId()))
+                            .forEach(partialSong -> {
+                                partialSong.setTitle(songResponse.getTitle());
+                                partialSong.setDuration(songResponse.getDuration());
+                            });
+                        }
+                    })
+                    .toList();
+
+            playlistRepository.saveAll(playlists);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
 
         public ResponseEntity<PlaylistResponse> removeSong(String playlistId, String songId) {
             Optional<Playlist> optionalPlaylist = playlistRepository.findById(playlistId);
             if (optionalPlaylist.isPresent()) {
 
                 Playlist playlist = optionalPlaylist.get();
-                playlist.getSongs().removeIf(partialSong -> partialSong.getId().equals(songId));
+                playlist.getSongs().removeIf(partialSong -> partialSong.getSongId().equals(songId));
                 playlistRepository.save(playlist);
 
                 return new ResponseEntity<>(mapToPlaylistResponse(optionalPlaylist.get()), HttpStatus.NO_CONTENT);
@@ -169,6 +192,7 @@
                     .description(playlist.getDescription())
                     .songs(playlist.getSongs())
                     .isPublic(playlist.getIsPublic())
+                    .isFavorite(playlist.getIsFavorite())
                     .build();
         }
 

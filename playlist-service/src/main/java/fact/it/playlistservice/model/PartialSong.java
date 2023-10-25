@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "partialSong")
+//@Document(value = "partialSong")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 public class PartialSong {
-    @Id
-    private String id;
+//    @Id
+//    private String id;
+    private String songId; // holds the id of the full song stored in library
     private String title;
     private int duration; // Duration in seconds
 }

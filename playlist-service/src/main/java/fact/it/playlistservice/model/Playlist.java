@@ -25,6 +25,6 @@ public class Playlist {
     private Boolean isFavorite;
 
     private ListType listType;
-    private List<PartialSong> songs; // List of song IDs associated with the playlist (stored as strings)
+    private List<PartialSong> songs; // List of partial song data associated with the playlist
 
 }

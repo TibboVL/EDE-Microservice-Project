@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,9 @@ public class SongService {
     private final WebClient webClient;
 
     @Value("${ratingservice.baseurl}")
-    private String RatingServiceBaseUrl;
+    private String ratingServiceBaseUrl;
+    @Value("${playlistservice.baseurl}")
+    private String playlistServiceBaseUrl;
 
     public ResponseEntity<Long> addDummyData() {
         songRepository.deleteAll();
@@ -79,7 +82,7 @@ public class SongService {
         if (optionalSong.isPresent()) {
             try {
                 Double averageRating = webClient.get()
-                        .uri("http://" + RatingServiceBaseUrl + "/api/rating/" + songId + "/average-rating")
+                        .uri("http://" + ratingServiceBaseUrl + "/api/rating/" + songId + "/average-rating")
                         .retrieve()
                         .bodyToMono(Double.class)
                         .block();
@@ -110,8 +113,29 @@ public class SongService {
             song.setCoverArt(songRequest.getCoverArt());
             song.setPlays(songRequest.getPlays());
             song.setLikes(songRequest.getLikes());
+
+            // Call the library service to update partial songs
+            ResponseEntity<?> responseEntity = webClient.put()
+                .uri("http://" + playlistServiceBaseUrl + "/api/playlist/updatePartialSongs")
+                .body(Mono.just(mapToSongResponse(song)), SongResponse.class) // Pass the SongResponse to the body
+                .exchangeToMono(response -> {
+                    if (response.statusCode().is2xxSuccessful()) {
+                        return response.bodyToMono(ResponseEntity.class);
+                    } else {
+                        System.out.println(response.statusCode());
+                        return Mono.error(new RuntimeException("Could not update partial songs!!"));
+                    }
+                })
+                .onErrorResume(error -> {
+                    // Handle the error case
+                    System.out.println("Error occurred: " + error.getMessage());
+                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+                })
+                .block();
+
             songRepository.save(song);
             return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.OK);
+
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

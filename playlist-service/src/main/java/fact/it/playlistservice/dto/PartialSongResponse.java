@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartialSongResponse {
-    private String id;
+//    private String id;
+    private String songId;
     private String title;
     private int duration; // Duration in seconds
 }
