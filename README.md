@@ -19,10 +19,10 @@ This service manages user-related operations, such as user registration, updatin
 
 | Call Type | Endpoints        | Comments                     |
 | --------- | ---------------- | ---------------------------- |
-| POST      | - /user          | Create a new user.           |
-| GET       | - /user/{userId} | Retrieve user details by ID. |
-| PUT       | - /user/{userId} | Update user information.     |
-| DELETE    | - /user/{userId} | Delete a user account.       |
+| POST      | `/user`          | Create a new user.           |
+| GET       | `/user/{userId}` | Retrieve user details by ID. |
+| PUT       | `/user/{userId}` | Update user information.     |
+| DELETE    | `/user/{userId}` | Delete a user account.       |
 
 ### Library service
 
@@ -59,10 +59,10 @@ This service manages user ratings for songs and podcast episodes.
 
 | Call Type | Endpoints          | Comments                              |
 | --------- | ------------------ | ------------------------------------- |
-| POST      | - /rating          | Rate a song or podcast episode.       |
-| GET       | - /rating/{itemId} | Retrieve ratings for a specific item. |
-| PUT       | - /rating/{itemId} | Update a rating for an item.          |
-| DELETE    | - /rating/{itemId} | Delete a rating for an item.          |
+| POST      | - `/rating`        | Rate a song or podcast episode.       |
+| GET       | - `/rating/{itemId}` | Retrieve ratings for a specific item. |
+| PUT       | - `/rating/{itemId}` | Update a rating for an item.          |
+| DELETE    | - `/rating/{itemId}` | Delete a rating for an item.          |
 
 ## My expansions
 > test
