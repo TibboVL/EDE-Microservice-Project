@@ -70,6 +70,8 @@ services:
   environment:
    MONGODB_PORT: 27018
    MONGODB_HOST: mongo-library
+   PLAYLIST_SERVICE_BASEURL: playlist-service-tibbovl.cloud.okteto.net
+   RATING: rating-service-tibbovl.cloud.okteto.net
  playlist-service:
   depends_on:
     - mongo-playlist
@@ -80,24 +82,18 @@ services:
     - mysql-playlist
     - library-service
   environment:
-   LIBRARY_SERVICE_BASEURL: library-service:8082
+   LIBRARY_SERVICE_BASEURL: library-service-tibbovl.cloud.okteto.net
    MONGODB_PORT: 27019
    MONGODB_HOST: mongo-playlist
+
 
  rating-service:
   depends_on:
     - mysql-rating
-#    - product-service
-#    - inventory-service
   image: tibbovl/rating-service
   ports:
     - 8084:8084
-#  links:
-#    - product-service
-#    - inventory-service
   environment:
-#   PRODUCT_SERVICE_BASEURL: rating-service:8080
-#   INVENTORY_INFO_SERVICE_BASEURL: rating-service:8082
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-rating
