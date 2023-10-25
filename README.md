@@ -28,30 +28,30 @@ This service manages user-related operations, such as user registration, updatin
 
 The Library Service is responsible for managing music and podcast content, including adding, updating, and deleting songs and podcast episodes.
 
-| Call Type | Endpoints                       | Comments                                   |
-| --------- | ------------------------------- | ------------------------------------------ |
-| POST      | - /library/song                 | Add a new song to the library.             |
-| GET       | - /library/song/{songId}        | Retrieve song details by ID.               | Publicly accessible without authenticating
-| PUT       | - /library/song/{songId}        | Update song information.                   |
-| DELETE    | - /library/song/{songId}        | Delete a song from the library.            |
-| POST      | - /library/podcasts             | Add a new podcast episode to the library.  |
-| GET       | - /library/podcasts/{podcastId} | Retrieve podcast episode details by ID.    |
-| PUT       | - /library/podcasts/{podcastId} | Update podcast episode information.        |
-| DELETE    | - /library/podcasts/{podcastId} | Delete a podcast episode from the library. |
+| Call Type | Endpoints                       | Comments                                   | Access without auth |
+| --------- | ------------------------------- | ------------------------------------------ | ------------------- |
+| POST      | `/library/song`                 | Add a new song to the library.             | No |
+| GET       | `/library/song/{songId}`        | Retrieve song details by ID.               | Yes |
+| PUT       | `/library/song/{songId}`        | Update song information.                   | No |
+| DELETE    | `/library/song/{songId}`        | Delete a song from the library.            | No |
+| POST      | `/library/podcasts`             | Add a new podcast episode to the library.  | No |
+| GET       | `/library/podcasts/{podcastId}` | Retrieve podcast episode details by ID.    | No |
+| PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | No |
+| DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | No |
 
 ### Playlist service
 
 This service manages user playlists, allowing users to create, update, and delete playlists, and add or remove songs from playlists.
 
-| Call Type | Endpoints                         | Comments                   |
-| --------- | --------------------------------- | -------------------------- |
-| POST      | - /playlist                       | Create a new playlist.     | Publicly accessible without authenticating
-| GET       | - /playlist/{playlistId}          | Get a playlist.            |
-| GET       | - /playlist/user/{userId}         | Get a user's playlists.    |
-| PUT       | - /playlist/{playlistId}          | Update playlist info.      |
-| PUT       | - /playlist/{playlistId}/{songId} | Add a song to playlist.    |
-| DELETE    | - /playlist/{playlistId}/{songId} | Remove song from playlist. |
-| DELETE    | - /playlist/{playlistId}          | Delete playlist.           |
+| Call Type | Endpoints                         | Comments                   | Access without auth |
+| --------- | --------------------------------- | -------------------------- | ------------------- |
+| POST      | `/playlist`                       | Create a new playlist.     | No |
+| GET       | `/playlist/{playlistId}`          | Get a playlist.            | Yes |
+| GET       | `/playlist/user/{userId}`         | Get a user's playlists.    | No |
+| PUT       | `/playlist/{playlistId}`          | Update playlist info.      | No |
+| PUT       | `/playlist/{playlistId}/{songId}` | Add a song to playlist.    | No |
+| DELETE    | `/playlist/{playlistId}/{songId}` | Remove song from playlist. | No |
+| DELETE    | `/playlist/{playlistId}`          | Delete playlist.           | No |
 
 ### Rating service
 
