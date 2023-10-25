@@ -52,13 +52,13 @@ The Library Service is responsible for managing music and podcast content, inclu
 | PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | Yes |
 | DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | Yes |-->
 
-The Library service utilizes the Playlist services hidden endpoint to update partial songs in case a song's information changes.
+The Library service uses the Playlist services hidden endpoint to update partial songs in case a song's information changes.
 
 | Mapping | Endpoint              | Uses    | Mapping | Endpoint |
 | ------- | ---------------------- | ------- | -------- | ------------- |
-| PUT     | `/song/{songId}`       | -       | PUT      | `/playlist/updatePartialSongs` | Special non-public method used by the library to update partial song data if a song were to get updated | Not accessible |
+| PUT     | `/song/{songId}`       | Uses       | PUT      | `/playlist/updatePartialSongs` | Special non-public method used by the library to update partial song data if a song were to get updated | Not accessible |
 
-The Library service utilizes the Rating service to retrieve the average rating when returning a song's information.
+The Library service uses the Rating service to retrieve the average rating when returning a song's information.
 
 | Mapping | Endpoint          | Uses   | Mapping | Endpoint |
 | ------- | ------------------ | ------ | -------- | ------------- |
