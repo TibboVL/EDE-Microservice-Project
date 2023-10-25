@@ -2,11 +2,16 @@
 
 Welcome to the documentation for my Enterprise Development Experience repository. This document provides an overview of the project's services, endpoints, and their connections.
 
+## Project theme
+
+My EDE project centers around a music service, featuring functionalities such as playlist management, song (and podcast)[^1] library maintenance, user registration, and ratings for songs (and podcast episodes)[^1]. The project's documentation illustrates the structure of the services, including their endpoints and operations.
+
+[^1]: Expansion.
 ## Services structure
 
 ![Project diagram](projectDiagram.png)
 
-## User service
+### User service
 
 This service manages user-related operations, such as user registration, updating user information, and account deletion.
 
@@ -17,7 +22,7 @@ This service manages user-related operations, such as user registration, updatin
 | PUT       | - /user/{userId} | Update user information.     |
 | DELETE    | - /user/{userId} | Delete a user account.       |
 
-## Library service
+### Library service
 
 The Library Service is responsible for managing music and podcast content, including adding, updating, and deleting songs and podcast episodes.
 
@@ -32,7 +37,7 @@ The Library Service is responsible for managing music and podcast content, inclu
 | PUT       | - /library/podcasts/{podcastId} | Update podcast episode information.        |
 | DELETE    | - /library/podcasts/{podcastId} | Delete a podcast episode from the library. |
 
-## Playlist service
+### Playlist service
 
 This service manages user playlists, allowing users to create, update, and delete playlists, and add or remove songs from playlists.
 
@@ -46,7 +51,7 @@ This service manages user playlists, allowing users to create, update, and delet
 | DELETE    | - /playlist/{playlistId}/{songId} | Remove song from playlist. |
 | DELETE    | - /playlist/{playlistId}          | Delete playlist.           |
 
-## Rating service
+### Rating service
 
 This service manages user ratings for songs and podcast episodes.
 
