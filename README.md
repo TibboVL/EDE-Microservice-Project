@@ -31,7 +31,7 @@ The Library Service is responsible for managing music and podcast content, inclu
 | Call Type | Endpoints                       | Comments                                   |
 | --------- | ------------------------------- | ------------------------------------------ |
 | POST      | - /library/song                 | Add a new song to the library.             |
-| GET       | - /library/song/{songId}        | Retrieve song details by ID.               |
+| GET       | - /library/song/{songId}        | Retrieve song details by ID.               | Publicly accessible without authenticating
 | PUT       | - /library/song/{songId}        | Update song information.                   |
 | DELETE    | - /library/song/{songId}        | Delete a song from the library.            |
 | POST      | - /library/podcasts             | Add a new podcast episode to the library.  |
@@ -45,7 +45,7 @@ This service manages user playlists, allowing users to create, update, and delet
 
 | Call Type | Endpoints                         | Comments                   |
 | --------- | --------------------------------- | -------------------------- |
-| POST      | - /playlist                       | Create a new playlist.     |
+| POST      | - /playlist                       | Create a new playlist.     | Publicly accessible without authenticating
 | GET       | - /playlist/{playlistId}          | Get a playlist.            |
 | GET       | - /playlist/user/{userId}         | Get a user's playlists.    |
 | PUT       | - /playlist/{playlistId}          | Update playlist info.      |
