@@ -43,18 +43,10 @@
         }
 
         public ResponseEntity<String> createMyFavorites(String userId) {
-            List<PlaylistResponse> userPlaylists = getUserPlaylists(userId).getBody();
-
-            boolean hasFavorites = true;
-            if (userPlaylists == null) {
-                hasFavorites = false;
-            } else if (userPlaylists.stream().anyMatch(playlistResponse ->
-                    playlistResponse.getIsFavorite() != null && playlistResponse.getIsFavorite())) {
-                hasFavorites = false;
-            }
+            boolean userHasFavorites = playlistRepository.findAllByUserId(userId).stream().anyMatch(playlist -> playlist.getIsFavorite());
 
             // if user has no favorite playlist add one else send forbidden
-            if (!hasFavorites) {
+            if (!userHasFavorites) {
                 Playlist playlist = Playlist.builder()
                         .name("My favorites")
                         .userId(userId)

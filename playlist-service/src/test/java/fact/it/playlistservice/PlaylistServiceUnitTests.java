@@ -274,7 +274,7 @@ class PlaylistServiceUnitTests {
         playlist.setIsPublic(true);
         playlist.setSongs(new ArrayList<>()); // Initialize the songs list here
         PartialSong partialSong = new PartialSong();
-        partialSong.setId(songId);
+        partialSong.setSongId(songId);
         playlist.getSongs().add(partialSong);
         when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
 
@@ -299,7 +299,7 @@ class PlaylistServiceUnitTests {
         playlist.setIsPublic(true);
         playlist.setSongs(new ArrayList<>()); // Initialize the songs list here
         PartialSong partialSong = new PartialSong();
-        partialSong.setId(songId);
+        partialSong.setSongId(songId);
         playlist.getSongs().add(partialSong);
 
         // Simulating playlist not found in the repository
