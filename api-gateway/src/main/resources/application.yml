@@ -29,42 +29,42 @@ spring:
         - id: get all users
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/all
+            - Path=/user/all
             - Method=GET 
           filters:
             - SetPath=/api/user/all
         - id: add dummy users
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/dummyData
+            - Path=/user/dummyData
             - Method=GET 
           filters:
             - SetPath=/api/user/dummyData
         - id: get-user
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/{id}
+            - Path=/user/{id}
             - Method=GET 
           filters:
             - SetPath=/api/user/{id}
         - id: create-user
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users
+            - Path=/user
             - Method=POST 
           filters:
             - SetPath=/api/user
         - id: update-user
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/{id}
+            - Path=/user/{id}
             - Method=PUT 
           filters:
             - SetPath=/api/user/{id}
         - id: delete-user
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
-            - Path=/users/{id}
+            - Path=/user/{id}
             - Method=DELETE 
           filters:
             - SetPath=/api/user/{id}
@@ -112,8 +112,6 @@ spring:
             - Method=DELETE 
           filters:
             - SetPath=/api/library/song/{id}
-
-
 
         # playlist service
         - id: get-playlist
@@ -166,3 +164,40 @@ spring:
             - Method=DELETE 
           filters:
             - SetPath=/api/playlist/{playlistId}/{songId}
+
+        # Rating service
+        - id: get all ratings
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/rating/all
+            - Method=GET
+          filters:
+            - SetPath=/api/rating/all
+        - id: get-rating
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/rating/{id}
+            - Method=GET
+          filters:
+            - SetPath=/api/rating/{id}
+        - id: create-rating
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/rating
+            - Method=POST
+          filters:
+            - SetPath=/api/rating
+        - id: update-rating
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/rating/{id}
+            - Method=PUT
+          filters:
+            - SetPath=/api/rating/{id}
+        - id: delete-rating
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/rating/{id}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/rating/{id}

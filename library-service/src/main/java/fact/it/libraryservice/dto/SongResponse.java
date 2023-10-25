@@ -25,4 +25,5 @@ public class SongResponse {
     private String coverArt;
     private Integer plays;
     private Integer likes;
+    private Double averageRating; // get this from rating api is optional
 }

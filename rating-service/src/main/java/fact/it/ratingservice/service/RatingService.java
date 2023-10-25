@@ -37,6 +37,24 @@ public class RatingService {
         }
     }
 
+    // not tested yet, needs data
+    public ResponseEntity<Double> getAverageRating(String songId) {
+        List<Rating> ratings = ratingRepository.findAllBySongId(songId);
+
+        if (!ratings.isEmpty()) {
+            double sum = 0;
+            for (Rating rating : ratings) {
+                sum += rating.getRating();
+            }
+            double averageRating = sum / ratings.size();
+
+            return new ResponseEntity<>(averageRating, HttpStatus.OK);
+        } else {
+            // item has no ratings yet
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     public ResponseEntity<RatingResponse> updateRating(Long songId, RatingRequest ratingRequest) {
         Optional<Rating> optionalRating = ratingRepository.findById(songId);
         if (optionalRating.isPresent()) {

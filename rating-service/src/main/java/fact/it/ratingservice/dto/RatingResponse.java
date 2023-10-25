@@ -13,5 +13,5 @@ public class RatingResponse {
     private Long id;
     private String userId;
     private String songId;
-    private Integer rating;
+    private double rating;
 }

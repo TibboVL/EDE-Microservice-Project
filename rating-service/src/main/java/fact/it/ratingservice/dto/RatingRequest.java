@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class RatingRequest {
     private String userId;
     private String songId;
-    private Integer rating;
+    private double rating;
 }

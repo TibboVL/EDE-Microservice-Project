@@ -7,9 +7,13 @@ import fact.it.libraryservice.model.Genre;
 import fact.it.libraryservice.model.Song;
 import fact.it.libraryservice.repository.SongRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,11 @@ import java.util.Optional;
 public class SongService {
 
     private final SongRepository songRepository;
+
+    private final WebClient webClient;
+
+    @Value("${ratingservice.baseurl}")
+    private String RatingServiceBaseUrl;
 
     public ResponseEntity<Long> addDummyData() {
         songRepository.deleteAll();
@@ -68,7 +77,21 @@ public class SongService {
     public ResponseEntity<SongResponse> getSong(String songId) {
         Optional<Song> optionalSong = songRepository.findById(songId);
         if (optionalSong.isPresent()) {
-            return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.OK);
+            try {
+                Double averageRating = webClient.get()
+                        .uri("http://" + RatingServiceBaseUrl + "/api/rating/" + songId + "/average-rating")
+                        .retrieve()
+                        .bodyToMono(Double.class)
+                        .block();
+
+                SongResponse songResponse = mapToSongResponse(optionalSong.get());
+                songResponse.setAverageRating(averageRating);
+                return new ResponseEntity<>(songResponse, HttpStatus.OK);
+            } catch (WebClientResponseException.NotFound e) {
+                // handle the 404 error here
+                // just return null for the average and handle it client side to not display
+                return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.NOT_FOUND);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
