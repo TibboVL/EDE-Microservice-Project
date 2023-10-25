@@ -16,10 +16,10 @@ My EDE project centers around a music service, featuring functionalities such as
 Serving as a link between various services, the gateway streamlines the user experience by converting specific service URLs to a unified format, reducing the complexity associated with managing multiple ports. It also plays a crucial role in enforcing a robust authentication system, ensuring secure access to the services, with the exception of specific exempted endpoints that are publicly accessible. 
 Examples of URL conversions:
 
-- `http://localhost:8081/api/user/{id}` -> `http://localhost:8080/user/{id}`
-- `http://localhost:8082/api/song/{songId}` -> `http://localhost:8080/library/song/{songId}`
+- `http://localhost:8081/api/user/{id}`             -> `http://localhost:8080/user/{id}`
+- `http://localhost:8082/api/library/song/{songId}` -> `http://localhost:8080/song/{songId}`
 - `http://localhost:8083/api/playlist/{playlistId}` -> `http://localhost:8080/playlist/{playlistId}`
-- `http://localhost:8084/api/rating/{itemId}` -> `http://localhost:8080/rating/{itemId}`
+- `http://localhost:8084/api/rating/{itemId}`       -> `http://localhost:8080/rating/{itemId}`
 
 This centralized approach not only simplifies user interaction but also ensures that data security is maintained, guaranteeing that only authorized users can access the services.
 
