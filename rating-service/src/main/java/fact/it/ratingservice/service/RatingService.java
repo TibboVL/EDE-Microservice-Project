@@ -44,6 +44,7 @@ public class RatingService {
             rating.setUserId(ratingRequest.getUserId());
             rating.setSongId(ratingRequest.getSongId());
             rating.setRating(ratingRequest.getRating());
+            ratingRepository.save(rating);
             return new ResponseEntity<>(mapToOrderLineItem(optionalRating.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

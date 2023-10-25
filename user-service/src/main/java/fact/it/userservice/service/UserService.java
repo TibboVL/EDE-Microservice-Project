@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final WebClient webClient;
 
     public ResponseEntity<Long> addDummyData() {
         userRepository.deleteAll();
@@ -75,6 +73,7 @@ public class UserService {
             user.setEmail(userRequest.getEmail());
             user.setDateOfBirth(userRequest.getDateOfBirth());
             user.setRegistrationDate(userRequest.getRegistrationDate());
+            userRepository.save(user);
             return new ResponseEntity<>(mapToUserResponse(optionalUser.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

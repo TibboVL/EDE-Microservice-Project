@@ -87,6 +87,7 @@ public class SongService {
             song.setCoverArt(songRequest.getCoverArt());
             song.setPlays(songRequest.getPlays());
             song.setLikes(songRequest.getLikes());
+            songRepository.save(song);
             return new ResponseEntity<>(mapToSongResponse(optionalSong.get()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
