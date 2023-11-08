@@ -10,19 +10,19 @@ spec:
     metadata:
       labels:
         app: mysql-rating
-  spec:
-    containers:
-      - name: mysql-rating
-        image: mysql:latest
-        ports:
-          - containerPort: 3306
-        volumeMounts:
-          - name: mysql-rating-data
-            mountPath: /var/lib/mysql
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: "abc123"
-    volumes:
-      - name: mysql-rating-data
-        persistentVolumeClaim:
-          claimName: mysql-rating-pvc
+    spec:
+      containers:
+        - name: mysql-rating
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-rating-data
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "abc123"
+      volumes:
+        - name: mysql-rating-data
+          persistentVolumeClaim:
+            claimName: mysql-rating-pvc

@@ -10,16 +10,16 @@ spec:
     metadata:
       labels:
         app: mongo-library
-  spec:
-    containers:
-      - name: mongo-library
-        image: mongo:latest
-        ports:
-          - containerPort: 27017
-        volumeMounts:
-          - name: mongo-library-data
-            mountPath: /data/db
-    volumes:
-      - name: mongo-library-data
-        persistentVolumeClaim:
-          claimName: mongo-library-pvc
+    spec:
+      containers:
+        - name: mongo-library
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-library-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-library-data
+          persistentVolumeClaim:
+            claimName: mongo-library-pvc

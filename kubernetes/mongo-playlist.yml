@@ -10,16 +10,16 @@ spec:
     metadata:
       labels:
         app: mongo-playlist
-  spec:
-    containers:
-      - name: mongo-playlist
-        image: mongo:latest
-        ports:
-          - containerPort: 27017
-        volumeMounts:
-          - name: mongo-playlist-data
-            mountPath: /data/db
-    volumes:
-      - name: mongo-playlist-data
-        persistentVolumeClaim:
-          claimName: mongo-playlist-pvc
+    spec:
+      containers:
+        - name: mongo-playlist
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-playlist-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-playlist-data
+          persistentVolumeClaim:
+            claimName: mongo-playlist-pvc
