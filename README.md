@@ -99,4 +99,7 @@ This service manages user ratings for songs and podcast episodes.
 
 
 ## My expansions
-> test
+
+2.2 Zet de deployment docker-compose.yml om naar Kubernetes Manifest .yml-files (+5%)
+    2.2.2 Gebruik ClusterIP & Nodeport op een logische manier (+5%)
+

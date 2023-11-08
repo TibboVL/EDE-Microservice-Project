@@ -1,26 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: playlist-service
+  name: playlist-deployment
 spec:
   selector:
     matchLabels:
-      app: playlist-service
+      app: playlist-deployment
   template:
     metadata:
       labels:
-        app: playlist-service
+        app: playlist-deployment
     spec:
       containers:
-      - name: playlist-service
+      - name: playlist-deployment
         image: tibbovl/playlist-service:latest
         ports:
         - containerPort: 8083
         env:
           - name: LIBRARY_SERVICE_BASEURL
-            value: "library-service-tibbovl.cloud.okteto.net"
+            value: library-service:8082
           - name: MONGODB_PORT
             value: "27019"
           - name: MONGODB_HOST
-            value: "mongo-playlist"
+            value: mongo-playlist
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playlist-service
+spec:
+  selector:
+    app: playlist-deployment
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8083
+  type: ClusterIP
