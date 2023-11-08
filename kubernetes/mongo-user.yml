@@ -24,3 +24,26 @@ spec:
           persistentVolumeClaim:
             claimName: mongo-user-pvc
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-user-pv # The name of this persistent volume
+spec:
+  capacity: # The storage capacity of this volume
+    storage: 1Gi 
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+    - ReadWriteOnce
+  hostPath: # location of the data
+    path: /data/mongodb 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-user-pvc # The name of this claim. 
+spec:
+  resources:
+    requests: # The storage capacity of this volume
+      storage: 1Gi
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+  - ReadWriteOnce
+  storageClassName: "" # Must be empty to disable dynamic provisioning.
