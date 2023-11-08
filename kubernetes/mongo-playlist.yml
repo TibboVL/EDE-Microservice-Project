@@ -23,3 +23,15 @@ spec:
         - name: mongo-playlist-data
           persistentVolumeClaim:
             claimName: mongo-playlist-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-playlist-pvc # The name of this claim. 
+spec:
+  resources:
+    requests: # The storage capacity of this volume
+      storage: 1Gi
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+  - ReadWriteOnce
+  storageClassName: "" # Must be empty to disable dynamic provisioning.

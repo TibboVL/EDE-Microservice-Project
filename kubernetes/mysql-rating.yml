@@ -26,3 +26,15 @@ spec:
         - name: mysql-rating-data
           persistentVolumeClaim:
             claimName: mysql-rating-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-rating-pvc # The name of this claim. 
+spec:
+  resources:
+    requests: # The storage capacity of this volume
+      storage: 1Gi
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+  - ReadWriteOnce
+  storageClassName: "" # Must be empty to disable dynamic provisioning.

@@ -23,3 +23,15 @@ spec:
         - name: mongo-library-data
           persistentVolumeClaim:
             claimName: mongo-library-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-library-pvc # The name of this claim. 
+spec:
+  resources:
+    requests: # The storage capacity of this volume
+      storage: 1Gi
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+  - ReadWriteOnce
+  storageClassName: "" # Must be empty to disable dynamic provisioning.
