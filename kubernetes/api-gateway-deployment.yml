@@ -20,7 +20,7 @@ spec:
         env:
         - name: USER_SERVICE_BASEURL
 #          value: user-service-tibbovl.cloud.okteto.net
-          value: user-service
+          value: user-service:8081
         - name: LIBRARY_SERVICE_BASEURL
 #          value: library-service-tibbovl.cloud.okteto.net
           value: library-service
