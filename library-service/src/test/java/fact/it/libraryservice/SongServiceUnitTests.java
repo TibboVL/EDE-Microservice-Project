@@ -9,6 +9,7 @@ import fact.it.libraryservice.service.SongService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -98,7 +101,7 @@ class SongServiceUnitTests {
         verify(songRepository, times(1)).findById(songId);
     }
 
-    /*@Test
+    @Test
     public void testUpdateSongWithExistingSong() {
         // Arrange
         String songId = "123";
@@ -117,16 +120,26 @@ class SongServiceUnitTests {
         existingSong.setId(songId);
         when(songRepository.findById(songId)).thenReturn(Optional.of(existingSong));
 
-        WebClient.RequestHeadersUriSpec requestHeadersUriSpecMock = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
-        WebClient.RequestBodyUriSpec requestBodySpec = Mockito.mock(WebClient.RequestBodyUriSpec.class);
-        WebClient.RequestHeadersSpec requestHeadersSpecMock = Mockito.mock(WebClient.RequestHeadersSpec.class);
-        WebClient.ResponseSpec responseSpecMock = Mockito.mock(WebClient.ResponseSpec.class);
+        // Initialize the necessary variables and mocks
+        WebClient.RequestBodySpec requestBodySpec = Mockito.mock(WebClient.RequestBodySpec.class);
+        WebClient.RequestBodyUriSpec requestBodyUriSpec = Mockito.mock(WebClient.RequestBodyUriSpec.class);
+        WebClient.RequestHeadersSpec requestHeadersSpec = Mockito.mock(WebClient.RequestHeadersSpec.class);
+        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+        ClientResponse clientResponse = Mockito.mock(ClientResponse.class);
 
-        when(webClient.put()).thenReturn(requestBodySpec);
-        when(requestHeadersUriSpecMock.uri(anyString())).thenReturn(requestHeadersSpecMock);
-        when(requestHeadersSpecMock.retrieve()).thenReturn(responseSpecMock);
-        when(responseSpecMock.bodyToMono(HttpStatus.class)).thenReturn(Mono.just(HttpStatus.OK));
-
+        // Configure the mock behavior
+        when(webClient.put()).thenReturn(requestBodyUriSpec);
+        when(requestBodyUriSpec.uri(anyString())).thenReturn(requestBodySpec);
+        when(requestBodySpec.body(any(Mono.class), eq(SongResponse.class))).thenReturn(requestHeadersSpec);
+        when(requestHeadersSpec.exchangeToMono(any(Function.class)))
+                .thenReturn(Mono.just(clientResponse).flatMap(response -> {
+                    if (response.statusCode().is2xxSuccessful()) {
+                        return Mono.just(ResponseEntity.ok().build()); // Adjust the response type as needed
+                    } else {
+                        System.out.println(response.statusCode());
+                        return Mono.error(new RuntimeException("Could not update partial songs!!"));
+                    }
+                }));
 
         // Act
         ResponseEntity<SongResponse> responseEntity = songService.updateSong(songId, songRequest);
@@ -139,7 +152,7 @@ class SongServiceUnitTests {
         assertEquals(songRequest.getDuration(), responseEntity.getBody().getDuration());
         verify(songRepository, times(1)).findById(songId);
         verify(songRepository, times(1)).save(any(Song.class));
-    }*/
+    }
 
     @Test
     public void testUpdateSongWithNotExistingSong() {

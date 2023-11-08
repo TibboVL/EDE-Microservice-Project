@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating-service
+spec:
+  selector:
+    matchLabels:
+      app: rating-service
+  template:
+    metadata:
+      labels:
+        app: rating-service
+    spec:
+      containers:
+      - name: rating-service
+        image: tibbovl/rating-service:latest
+        ports:
+        - containerPort: 8084
+        env:
+          - name: MYSQL_DB_USERNAME
+            value: "root"
+          - name: MYSQL_DB_PASSWORD
+            value: "abc123"
+          - name: MYSQL_DB_HOST
+            value: "mysql-rating"
+          - name: MYSQL_DB_PORT
+            value: "3300"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rating-service
+spec:
+  selector:
+    app: rating-service
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084

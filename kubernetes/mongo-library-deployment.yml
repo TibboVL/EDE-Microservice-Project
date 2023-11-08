@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-service
+spec:
+  selector:
+    matchLabels:
+      app: library-service
+  template:
+    metadata:
+      labels:
+        app: library-service
+    spec:
+      containers:
+      - name: library-service
+        image: tibbovl/library-service:latest
+        ports:
+        - containerPort: 8082
+        env:
+          - name: MONGODB_PORT
+            value: "27018"
+          - name: MONGODB_HOST
+            value: "mongo-library"
+          - name: PLAYLIST_SERVICE_BASEURL
+            value: "playlist-service-tibbovl.cloud.okteto.net"
+          - name: RATING_SERVICE_BASEURL
+            value: "rating-service-tibbovl.cloud.okteto.net"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-service
+spec:
+  selector:
+    app: library-service
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8082
