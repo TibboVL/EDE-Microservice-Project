@@ -42,10 +42,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-rating-service
+  name: mysql-rating-service
 spec:
   selector:
-    app: mongo-rating
+    app: mysql-rating
   ports:
     - protocol: TCP
       port: 3306
