@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-rating
+spec:
+  selector:
+    matchLabels:
+      app: mysql-rating
+  template:
+    metadata:
+      labels:
+        app: mysql-rating
+  spec:
+    containers:
+      - name: mysql-rating
+        image: mysql:latest
+        ports:
+          - containerPort: 3306
+        volumeMounts:
+          - name: mysql-rating-data
+            mountPath: /var/lib/mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "abc123"
+    volumes:
+      - name: mysql-rating-data
+        persistentVolumeClaim:
+          claimName: mysql-rating-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-rating
+spec:
+  selector:
+    app: mysql-rating
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

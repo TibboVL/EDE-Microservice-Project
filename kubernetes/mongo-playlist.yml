@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-playlist
+spec:
+  selector:
+    matchLabels:
+      app: mongo-playlist
+  template:
+    metadata:
+      labels:
+        app: mongo-playlist
+  spec:
+    containers:
+      - name: mongo-playlist
+        image: mongo:latest
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: mongo-playlist-data
+            mountPath: /data/db
+    volumes:
+      - name: mongo-playlist-data
+        persistentVolumeClaim:
+          claimName: mongo-playlist-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-playlist
+spec:
+  selector:
+    app: mongo-playlist
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

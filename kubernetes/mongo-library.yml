@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-library
+spec:
+  selector:
+    matchLabels:
+      app: mongo-library
+  template:
+    metadata:
+      labels:
+        app: mongo-library
+  spec:
+    containers:
+      - name: mongo-library
+        image: mongo:latest
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: mongo-library-data
+            mountPath: /data/db
+    volumes:
+      - name: mongo-library-data
+        persistentVolumeClaim:
+          claimName: mongo-library-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-library
+spec:
+  selector:
+    app: mongo-library
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
