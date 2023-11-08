@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: user-deployment
 spec:
   selector:
     matchLabels:
-      app: user-service
+      app: user-deployment
   template:
     metadata:
       labels:
-        app: user-service
+        app: user-deployment
     spec:
       containers:
-      - name: user-service
+      - name: user-deployment
         image: tibbovl/user-service:latest
         ports:
         - containerPort: 8081
@@ -28,7 +28,7 @@ metadata:
   name: user-service
 spec:
   selector:
-    app: user-service
+    app: user-deployment
   ports:
     - protocol: TCP
       port: 8081
