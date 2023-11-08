@@ -1,0 +1,30 @@
+.onImageContainer:before,
+.onImageContainer:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0px;
+  height: 1rem;
+  width: 1rem;
+  /*box-shadow: 0 0 0 2px red;*/
+  /*border-radius:0 0 0.5em 0;*/
+  /*border-radius: 0 0 0 -0.5em;*/
+  background-image: radial-gradient(
+    circle at 100% 100%,
+    transparent 1rem,
+    #1e293b calc(1rem)
+  );
+}
+.onImageContainer:before {
+  left: -1rem;
+  top: calc(40px - 1rem);
+  rotate: 180deg;
+}
+
+.onImageContainer:after {
+  right: 0;
+  top: -1rem;
+  rotate: 180deg;
+  /*border-radius: 0 0 0 0.5em;*/
+  /*border-radius:0 0 0.5em 0;*/
+}

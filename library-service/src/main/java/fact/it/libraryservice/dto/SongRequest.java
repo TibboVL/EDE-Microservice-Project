@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class SongRequest {
     private String title;
-    private String artist;
+    private String artistId;
     private String album;
     private Genre genre;
     private Integer duration; // represented in seconds

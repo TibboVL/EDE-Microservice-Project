@@ -1,1 +1,23 @@
 <h1>EDE frontend</h1>
+<div class="flex flex-col gap-2">
+  <button (click)="makeApiRequest()">Make api request</button>
+  <button (click)="login()">login</button>
+  <button (click)="oauthService.initCodeFlow()">initCodeFlow</button>
+  <button (click)="oauthService.initLoginFlow()">initLoginFlow</button>
+  <button (click)="oauthService.initLoginFlow()">initLoginFlow</button>
+  <button (click)="oauthService.initLoginFlowInPopup()">
+    initLoginFlowInPopup
+  </button>
+  <button (click)="randomizeSongs()">addDummyData</button>
+</div>
+
+<div class="bg-slate-900 p-8">
+  <h2 class="text-blue-200 text-3xl my-8">Popular</h2>
+
+  <div class="flex w-full gap-4 flex-wrap">
+    <app-song-card
+      *ngFor="let song of songs$ | async"
+      [song]="song"
+    ></app-song-card>
+  </div>
+</div>

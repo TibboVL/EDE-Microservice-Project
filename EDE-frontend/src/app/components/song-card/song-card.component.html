@@ -1,0 +1,32 @@
+<article
+  class="flex flex-col gap-2 p-4 bg-slate-800 text-blue-50 rounded-xl shadow-lg w-60"
+>
+  <h3 class="text-xl">{{ song.title }}</h3>
+  <div class="img-container relative aspect-square w-full flex">
+    <img
+      class="aspect-square rounded-xl object-cover"
+      [src]="
+        song.coverArt == null
+          ? 'https://source.unsplash.com/random?sig=' + getRandomNumber()
+          : song.coverArt
+      "
+      [alt]="song.title + ' cover'"
+    />
+    <p
+      class="onImageContainer absolute bg-slate-800 p-2 right-0 bottom-0 rounded-tl-2xl"
+    >
+      <fa-icon icon="clock" class="text-sm"></fa-icon>
+      {{ songDurationToMinSec(song.duration) }}
+    </p>
+  </div>
+
+  <div class="flex justify-between gap-4">
+    <p>By: {{ song.artistId }}</p>
+    <p>Album: {{ song.album }}</p>
+  </div>
+
+  <footer class="flex gap-4 justify-between items-center">
+    <p><fa-icon icon="heart" class="text-sm"></fa-icon> {{ song.likes }}</p>
+    <p><fa-icon icon="music" class="text-sm"></fa-icon> {{ song.plays }}</p>
+  </footer>
+</article>

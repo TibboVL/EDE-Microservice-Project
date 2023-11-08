@@ -16,9 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class SongService {
     private String ratingServiceBaseUrl;
     @Value("${playlistservice.baseurl}")
     private String playlistServiceBaseUrl;
-
+    Random rand = new Random();
     public ResponseEntity<Long> addDummyData() {
         songRepository.deleteAll();
         int amount = 100;
@@ -42,19 +40,218 @@ public class SongService {
         }
         return new ResponseEntity<>(songRepository.count(), HttpStatus.CREATED);
     }
+    List<String> randomSongNames = Arrays.asList(
+            "Whispering Fire",
+                    "Moonlight Serenade",
+                    "Echoes of the Heart",
+                    "Melodies of Tomorrow",
+                    "Dancing in the Rain",
+                    "Serene Symphony",
+                    "Starry Nights",
+                    "Memories Unforgotten",
+                    "Lost in Time",
+                    "Ocean's Lullaby",
+                    "Forever and Beyond",
+                    "Enchanted Dreams",
+                    "River of Love",
+                    "Chasing the Wind",
+                    "Euphoria's Embrace",
+                    "Shadows of the Past",
+                    "Journey to Destiny",
+                    "Eternal Echo",
+                    "Velvet Skies",
+                    "Harmonious Whispers",
+                    "Midnight Rendezvous",
+                    "Destiny's Call",
+                    "Reflections of the Soul",
+                    "Cascade of Dreams",
+                    "Serenade of the Seas",
+                    "Whispers in the Wind",
+                    "Dreamer's Delight",
+                    "Twilight Melodies",
+                    "Symphony of Hope",
+                    "Dance of the Stars",
+                    "Infinite Love",
+                    "Aurora's Embrace",
+                    "Serenity's Song",
+                    "Echoes of Eternity",
+                    "Melody of the Heart",
+                    "Ocean's Symphony",
+                    "Eternal Love Affair",
+                    "Rhapsody in Blue",
+                    "Lost Horizon",
+                    "Enigma of Time",
+                    "Memories in Motion",
+                    "Cosmic Ballad",
+                    "Harmony's Embrace",
+                    "Midnight Muse",
+                    "Whispers of the Night",
+                    "Voyage of the Heart",
+                    "Dreamer's Destiny",
+                    "Starlight Sonata",
+                    "Elysian Melody",
+                    "River of Dreams",
+                    "Celestial Waltz",
+                    "Eternal Symphony",
+                    "Echoes of Infinity",
+                    "Enchanted Reverie",
+                    "Lullaby of the Moon",
+                    "Melodies of Eternity",
+                    "Ocean's Embrace",
+                    "Symphony of Dreams",
+                    "Chasing the Stars",
+                    "Aria of Hope",
+                    "Ethereal Echoes",
+                    "Whispering Melodies",
+                    "Moonlit Memories",
+                    "Serenade of the Soul",
+                    "Song of the Sirens",
+                    "Cascade of Emotions",
+                    "Dreamer's Desire",
+                    "Symphony of the Seas",
+                    "Twilight Whispers",
+                    "Celestial Dreams",
+                    "Enchanted Serenity",
+                    "Whispering Winds",
+                    "Melodies of the Night",
+                    "Echoes of Passion",
+                    "Ocean's Lament",
+                    "Symphony of the Heart",
+                    "Dancing with Fire",
+                    "Eternal Serenade",
+                    "River of Time",
+                    "Whispers in the Dark",
+                    "Euphoria's Embrace",
+                    "Moonlit Rhapsody",
+                    "Serenade of the Stars",
+                    "Stardust Melody",
+                    "Lost in Love",
+                    "Echoes of Destiny",
+                    "Enchanted Memories",
+                    "Symphony of Silence",
+                    "Melodies of the Sea",
+                    "Ocean's Call",
+                    "Eternal Bliss",
+                    "Whispering Echoes",
+                    "Midnight Melodies",
+                    "Rhapsody of the Heart",
+                    "Serenade of the Senses",
+                    "Dreams of Tomorrow",
+                    "Enigma of Love",
+                    "Symphony of the Night",
+                    "Chasing the Moon",
+                    "Echoes of Tranquility",
+                    "Serenade of the Skies",
+                    "Whispering Eternity",
+                    "Moonlit Symphony",
+                    "Melodies of the Stars",
+                    "Ocean's Fury",
+                    "Symphony of Solitude",
+                    "Dancing in Dreams",
+                    "Eternal Embrace",
+                    "Whispers of the Wind",
+                    "River of Serenity",
+                    "Euphoria's Echo",
+                    "Twilight Serenade",
+                    "Serenade of the Shadows",
+                    "Echoes of Desire",
+                    "Enchanted Reverie",
+                    "Symphony of the Sirens",
+                    "Melody of Memories",
+                    "Ocean's Whispers",
+                    "Eternal Whispers",
+                    "Whispering Serenity",
+                    "Moonlight Melodies",
+                    "Serenade of the Soul",
+                    "Dreams of Eternity",
+                    "Enchanted Symphony",
+                    "Symphony of the Stars",
+                    "Echoes of the Sea",
+                    "Melodies of Love",
+                    "Ocean's Embrace",
+                    "Eternal Echoes",
+                    "Whispering Waters",
+                    "Moonlit Whispers",
+                    "Serenade of Dreams",
+                    "Symphony of the Skies",
+                    "Dancing in the Stars",
+                    "Echoes of Forever",
+                    "Enchanted Melody",
+                    "Melodies of the Heart",
+                    "Ocean's Lullaby",
+                    "Eternal Serenade",
+                    "Whispering Echo",
+                    "Moonlight Sonata",
+                    "Serenade of the Night",
+                    "Symphony of Time",
+                    "Dancing with Shadows",
+                    "Echoes of Love",
+                    "Enchanted Dreams",
+                    "Melodies of the Soul",
+                    "Ocean's Melody",
+                    "Eternal Rhapsody",
+                    "Whispering Breeze",
+                    "Moonlit Lullaby",
+                    "Serenade of Eternity",
+                    "Symphony of Dreams",
+                    "Dancing in Silence",
+                    "Echoes of the Universe",
+                    "Enchanted Echoes",
+                    "Melodies of the Wind",
+                    "Ocean's Harmony",
+                    "Eternal Melody",
+                    "Whispering Silence",
+                    "Moonlight Whispers",
+                    "Serenade of the Ocean",
+                    "Symphony of Hope",
+                    "Dancing with Destiny",
+                    "Echoes of the Heart",
+                    "Enchanted Symphony",
+                    "Melodies of the Stars",
+                    "Ocean's Symphony",
+                    "Eternal Harmony",
+                    "Whispering Dreams",
+                    "Moonlit Serenade",
+                    "Serenade of the Universe",
+                    "Symphony of Tranquility",
+                    "Dancing in the Rain",
+                    "Echoes of the Soul",
+                    "Enchanted Lullaby",
+                    "Melodies of Destiny",
+                    "Ocean's Song",
+                    "Eternal Waltz",
+                    "Whispering Destiny",
+                    "Moonlight Dance",
+                    "Serenade of Tranquility",
+                    "Symphony of the Night",
+                    "Dancing with Fireflies",
+                    "Echoes of the Mind",
+                    "Enchanted Voyage",
+                    "Melodies of the Sirens",
+                    "Ocean's Melody",
+                    "Eternal Sonata",
+                    "Whispering Melodies",
+                    "Moonlit Embrace",
+                    "Serenade of the Heart",
+                    "Symphony of the Stars",
+                    "Dancing in the Wind",
+                    "Echoes of Solitude",
+                    "Enchanted Whispers"
+    );
+
     public SongRequest generateRandomSongRequest() {
         // Implement logic to generate random user data here
         // For simplicity, you can use a library like Faker to generate random data
         // Replace the placeholders with actual logic to generate random data
         SongRequest songRequest = new SongRequest();
-        songRequest.setTitle("Song title");
-        songRequest.setArtist("artistname");
-        songRequest.setGenre(Genre.POP);
-        songRequest.setDuration(100);
+        songRequest.setTitle(randomSongNames.get(rand.nextInt(randomSongNames.size())));
+        songRequest.setArtistId(String.valueOf(rand.nextInt(10)));
+        songRequest.setGenre(Genre.randomGenre()) ;
+        songRequest.setDuration(rand.nextInt(300) + 60);
         songRequest.setAlbum("1");
-        songRequest.setLikes(100);
+        songRequest.setLikes(rand.nextInt(5000));
         songRequest.setReleaseDate(new Date());
-        songRequest.setPlays(1000);
+        songRequest.setPlays(rand.nextInt(50000));
         songRequest.setPath("test");
 
         return songRequest;
