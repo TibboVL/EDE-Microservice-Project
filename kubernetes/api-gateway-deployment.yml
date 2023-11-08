@@ -19,10 +19,14 @@ spec:
         - containerPort: 8080
         env:
         - name: USER_SERVICE_BASEURL
-          value: user-service-tibbovl.cloud.okteto.net
+#          value: user-service-tibbovl.cloud.okteto.net
+          value: user-service
         - name: LIBRARY_SERVICE_BASEURL
-          value: library-service-tibbovl.cloud.okteto.net
+#          value: library-service-tibbovl.cloud.okteto.net
+          value: library-service
         - name: PLAYLIST_SERVICE_BASEURL
-          value: playlist-service-tibbovl.cloud.okteto.net
+#          value: playlist-service-tibbovl.cloud.okteto.net
+          value: playlist-service
         - name: RATING_SERVICE_BASEURL
-          value: rating-service-tibbovl.cloud.okteto.net
+#          value: rating-service-tibbovl.cloud.okteto.net
+          value: rating-service
