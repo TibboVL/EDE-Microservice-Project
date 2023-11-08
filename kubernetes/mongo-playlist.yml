@@ -35,7 +35,7 @@ spec:
   accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
   - ReadWriteOnce
   storageClassName: "" # Must be empty to disable dynamic provisioning.
-  ---
+---
 apiVersion: v1
 kind: Service
 metadata:
