@@ -23,11 +23,11 @@ spec:
         - name: mongo-user-data
           persistentVolumeClaim:
             claimName: mongo-user-pvc
-
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mongodb-user-pv # The name of this persistent volume
+  name: mongo-user-pv # The name of this persistent volume
 spec:
   capacity: # The storage capacity of this volume
     storage: 1Gi 
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongodb-user-pvc # The name of this claim. 
+  name: mongo-user-pvc # The name of this claim. 
 spec:
   resources:
     requests: # The storage capacity of this volume
