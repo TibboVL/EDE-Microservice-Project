@@ -24,16 +24,3 @@ spec:
           - name: MONGODB_HOST
             value: "mongo-playlist"
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: playlist-service
-spec:
-  selector:
-    app: playlist-service
-  ports:
-    - protocol: TCP
-      port: 8083
-      targetPort: 8083

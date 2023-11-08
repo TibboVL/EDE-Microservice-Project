@@ -26,16 +26,3 @@ spec:
           - name: RATING_SERVICE_BASEURL
             value: "rating-service-tibbovl.cloud.okteto.net"
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: library-service
-spec:
-  selector:
-    app: library-service
-  ports:
-    - protocol: TCP
-      port: 8082
-      targetPort: 8082

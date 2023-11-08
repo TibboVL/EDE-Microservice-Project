@@ -23,15 +23,3 @@ spec:
       - name: mongo-library-data
         persistentVolumeClaim:
           claimName: mongo-library-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo-library
-spec:
-  selector:
-    app: mongo-library
-  ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
