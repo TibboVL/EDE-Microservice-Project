@@ -18,9 +18,9 @@ spec:
         - containerPort: 8082
         env:
           - name: MONGODB_PORT
-            value: "27018"
+            value: "27017"
           - name: MONGODB_HOST
-            value: mongo-library
+            value: mongo-library-service
           - name: PLAYLIST_SERVICE_BASEURL
             value: playlist-service:8083
           - name: RATING_SERVICE_BASEURL

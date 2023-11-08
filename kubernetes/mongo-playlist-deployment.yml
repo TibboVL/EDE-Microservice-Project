@@ -20,9 +20,9 @@ spec:
           - name: LIBRARY_SERVICE_BASEURL
             value: library-service:8082
           - name: MONGODB_PORT
-            value: "27019"
+            value: "27017"
           - name: MONGODB_HOST
-            value: mongo-playlist
+            value: mongo-playlist-service
 
 ---
 apiVersion: v1
