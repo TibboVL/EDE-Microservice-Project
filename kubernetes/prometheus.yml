@@ -1,4 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-reader
+rules:
+- apiGroups: [""]
+  resources: ["nodes", "pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-reader-binding
+subjects:
+- kind: ServiceAccount
+  name: default
+roleRef:
+  kind: ClusterRole
+  name: prometheus-reader
+  apiGroup: rbac.authorization.k8s.io
+ 
+ ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,6 +35,7 @@ spec:
       labels:
         app: prometheus
     spec:
+      serviceAccountName: prometheus-reader
       containers:
       - name: prometheus
         image: prom/prometheus:v2.30.0
