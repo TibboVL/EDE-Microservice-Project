@@ -24,6 +24,8 @@ spec:
         volumeMounts:
           - name: prometheus-config-volume
             mountPath: /etc/prometheus
+        securityContext:
+            allowPrivilegeEscalation: false
       volumes:
       - name: prometheus-config-volume
         configMap:
