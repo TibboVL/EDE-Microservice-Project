@@ -1,5 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Token } from '@angular/compiler';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -8,8 +13,21 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class SongService {
   // private baseUrl = 'http://api-tibbovl.cloud.okteto.net/api/library/song';
   private baseUrl = 'http://localhost:8080/song';
+  private myToken = '';
+  private intervalId: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.intervalId = setInterval(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.myToken = token;
+        console.log(this.myToken);
+        clearInterval(this.intervalId); // Stop the interval once the token is found
+      } else {
+        console.log('test');
+      }
+    }, 5000);
+  }
 
   createSong(songRequest: any): Observable<any> {
     return this.http
@@ -31,7 +49,11 @@ export class SongService {
 
   deleteSong(songId: string): Observable<any> {
     return this.http
-      .delete<any>(`${this.baseUrl}/${songId}`)
+      .delete<any>(`${this.baseUrl}/${songId}`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.myToken}`,
+        }),
+      })
       .pipe(catchError(this.handleError));
   }
 

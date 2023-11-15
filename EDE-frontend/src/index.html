@@ -1,13 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>EDEFrontend</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>EDEFrontend</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      window.handleCredentialResponse = function (response) {
+        localStorage.setItem("token", response.credential);
+        const customEvent = new Event("customEvent");
+        window.dispatchEvent(customEvent);
+        console.log(response);
+        console.log("ID: " + response.id);
+        console.log("Full Name: " + response.name);
+        console.log("Given Name: " + response.given_name);
+        console.log("Family Name: " + response.family_name);
+        console.log("Image URL: " + response.picture);
+        console.log("Email: " + response.email);
+      };
+    </script>
+  </head>
+  <body class="bg-slate-900">
+    <app-root></app-root>
+  </body>
 </html>
