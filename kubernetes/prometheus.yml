@@ -4,7 +4,7 @@ metadata:
   name: prometheus-reader
 rules:
 - apiGroups: [""]
-  resources: ["nodes", "pods", "services", "endpoints"]
+  resources: ["nodes", "pods", "services", "endpoints", "clusterroles"]
   verbs: ["get", "list", "watch"]
 
 ---
