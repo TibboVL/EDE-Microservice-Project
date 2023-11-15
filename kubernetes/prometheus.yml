@@ -59,3 +59,8 @@ data:
         tls_config:
           ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    remote_write:
+      - url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+        basic_auth:
+          username: "272290"
+          password: "glc_eyJvIjoiNTc0MTM2IiwibiI6InN0YWNrLTI4NjIxNS1obS13cml0ZS1lZGUtcHJvamVjdCIsImsiOiIzcjMzSHA1YWF3NUQzSWgwNktqS2YwMGgiLCJtIjp7InIiOiJldSJ9fQ=="
