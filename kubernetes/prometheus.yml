@@ -24,10 +24,10 @@ spec:
         volumeMounts:
           - name: prometheus-config-volume
             mountPath: /etc/prometheus
-    volumes:
-    - name: prometheus-config-volume
-      configMap:
-        name: prometheus-server-conf
+      volumes:
+      - name: prometheus-config-volume
+        configMap:
+          name: prometheus-server-conf
 ---
 apiVersion: v1
 kind: Service
