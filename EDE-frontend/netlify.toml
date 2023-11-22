@@ -1,0 +1,4 @@
+[build]
+  base = "EDE-frontend"
+  publish = "dist/ede-frontend/browser"
+  command = "npm run build"
