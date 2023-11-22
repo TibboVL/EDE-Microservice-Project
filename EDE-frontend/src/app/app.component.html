@@ -1,39 +1,7 @@
 <app-nav></app-nav>
-<div class="container">
-  <button
-    *ngIf="!isLoggedIn"
-    class="p-4 bg-cyan-500"
-    (click)="login()"
-    type="submit"
-  >
-    Login
-  </button>
-  <div *ngIf="isLoggedIn" class="content">
-    <span>Welcome !!</span>
-    <a class="btn btn-default pull-right" (click)="logout()" href="#">Logout</a>
-    <br />
-    <!-- <foo-details></foo-details> -->
-  </div>
-</div>
-<div
-  class="flex gap-2 bg-slate-900 text-white container mx-auto justify-end py-4"
->
-  <!--   <button (click)="makeApiRequest()" class="bg-gray-600 p-4 border rounded-md">
-    Make api request
-  </button>
 
-  <button (click)="randomizeSongs()" class="bg-gray-600 p-4 border rounded-md">
-    addDummyData
-  </button> -->
-</div>
-
-<div class="bg-slate-900 p-8">
-  <h2 class="text-blue-200 text-3xl my-8">Popular</h2>
-
-  <div class="flex w-full gap-4 flex-wrap">
-    <!-- <app-song-card
-      *ngFor="let song of songs$ | async"
-      [song]="song"
-    ></app-song-card> -->
-  </div>
-</div>
+<main class="container mx-auto flex gap-4 mt-12">
+  <app-sidebar></app-sidebar>
+  <!-- <app-home></app-home> -->
+  <router-outlet></router-outlet>
+</main>

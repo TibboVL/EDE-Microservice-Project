@@ -1,0 +1,12 @@
+<section class="bg-slate-900 @container w-full">
+  <h2 class="text-blue-200 text-3xl my-8">Popular</h2>
+
+  <div
+    class="grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
+  >
+    <app-song-card
+      *ngFor="let song of songs$ | async"
+      [song]="song"
+    ></app-song-card>
+  </div>
+</section>

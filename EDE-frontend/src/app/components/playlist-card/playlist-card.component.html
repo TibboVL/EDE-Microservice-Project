@@ -1,0 +1,16 @@
+<a
+  [routerLink]="'/playlist/' + playlist.id"
+  class="flex p-2 gap-2 h-16 bg-white bg-opacity-10 rounded-md hover:bg-opacity-20 cursor-pointer"
+>
+  <img
+    src="https://source.unsplash.com/40x40"
+    alt=""
+    class="h-full aspect-square"
+  />
+  <div class="flex flex-col">
+    <h3 class="font-bold">{{ playlist.name }}</h3>
+    <div class="flex text-white/50">
+      <p>Playlist - by Y</p>
+    </div>
+  </div>
+</a>

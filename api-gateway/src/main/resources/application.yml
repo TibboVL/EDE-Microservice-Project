@@ -15,10 +15,12 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENTID}
-            client-secret: ${GOOGLE_CLIENTSECRET}
+            #client-id: ${GOOGLE_CLIENTID}
+            client-id: 466655062537-ocs19qdjbpdkupnpi0ff86lq3gofngis.apps.googleusercontent.com
+            #client-secret: ${GOOGLE_CLIENTSECRET}
+            client-secret: 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
             scope: openid,profile,email
-      resourceserver:
+      resource-server:
         jwt:
           issuer-uri: https://accounts.google.com
           jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
@@ -109,7 +111,7 @@ spring:
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/song/{id}
-            - Method=DELETE 
+            - Method=DELETE
           filters:
             - SetPath=/api/library/song/{id}
 

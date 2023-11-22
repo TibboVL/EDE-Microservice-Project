@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'app-playlist',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
+  templateUrl: './playlist.component.html',
+  styleUrls: ['./playlist.component.scss']
 })
-export class NavComponent {}
+export class PlaylistComponent {
+
+}

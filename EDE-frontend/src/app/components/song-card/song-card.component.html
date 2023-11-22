@@ -1,7 +1,8 @@
 <article
-  class="flex flex-col gap-2 p-4 bg-slate-800 text-blue-50 rounded-xl shadow-lg w-60"
+  class="flex flex-col gap-2 p-4 bg-slate-800 text-blue-50 rounded-xl shadow-lg w-full"
 >
-  <h3 class="text-xl">{{ song.title }}</h3>
+  <h3 class="text-xl line-clamp-1 overflow-ellipsis">{{ song.title }}</h3>
+  <!-- <button (click)="delete(song.id)">DELETE</button> -->
   <div class="img-container relative aspect-square w-full flex">
     <img
       class="aspect-square rounded-xl object-cover"

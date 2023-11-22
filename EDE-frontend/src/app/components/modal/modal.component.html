@@ -1,0 +1,27 @@
+<section
+  id="modalContainer"
+  class="z-50 fixed items-center justify-center inset-0 overflow-y-auto"
+  [style.display]="showModal ? 'flex' : 'none'"
+>
+  <div
+    class="fixed inset-0 transform transition-all backdrop-blur-sm"
+    (click)="onCloseModal()"
+  >
+    <div class="absolute inset-0 bg-gray-800 opacity-25"></div>
+  </div>
+  <div
+    *ngIf="showModal"
+    [@slideIn]
+    [ngClass]="getMaxWidth()"
+    class="py-4 px-6 mb-6 bg-white text-black rounded-lg max-h-[90vh] overflow-y-auto overflow-x-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
+  >
+    <header class="flex justify-center mb-4">
+      <h3 class="text-xl font-bold text-black">{{ title }}</h3>
+    </header>
+    <!-- Modal content here -->
+    <ng-content></ng-content>
+
+    <ng-template #footer> </ng-template>
+    <div *ngIf="!footer">test</div>
+  </div>
+</section>

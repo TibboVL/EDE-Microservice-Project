@@ -1,0 +1,8 @@
+<button
+  class="
+  {{ getStyle() }} 
+  nline-flex items-center border border-transparent px-4 py-2 rounded-md font-semibold text-xs text-white uppercase tracking-widest disabled:opacity-25 transition focus-visible:outline focus-visible:outline-offset-2"
+  [disabled]="disabled ? true : null"
+>
+  <ng-content></ng-content>
+</button>

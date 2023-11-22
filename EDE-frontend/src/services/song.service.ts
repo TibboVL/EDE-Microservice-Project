@@ -5,28 +5,22 @@ import {
 } from '@angular/common/http';
 import { Token } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SongService {
-  // private baseUrl = 'http://api-tibbovl.cloud.okteto.net/api/library/song';
-  private baseUrl = 'http://localhost:8080/song';
-  private myToken = '';
-  private intervalId: any;
+  private baseUrl = environment.apiBaseURL + 'song';
 
-  constructor(private http: HttpClient) {
-    this.intervalId = setInterval(() => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        this.myToken = token;
-        console.log(this.myToken);
-        clearInterval(this.intervalId); // Stop the interval once the token is found
-      } else {
-        console.log('test');
-      }
-    }, 5000);
+  constructor(private http: HttpClient, private oauthService: OAuthService) {}
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: 'Bearer ' + this.oauthService.getIdToken(),
+    });
   }
 
   createSong(songRequest: any): Observable<any> {
@@ -48,12 +42,9 @@ export class SongService {
   }
 
   deleteSong(songId: string): Observable<any> {
+    console.log('trying to delete:' + songId);
     return this.http
-      .delete<any>(`${this.baseUrl}/${songId}`, {
-        headers: new HttpHeaders({
-          Authorization: `Bearer ${this.myToken}`,
-        }),
-      })
+      .delete<any>(`${this.baseUrl}/${songId}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
@@ -91,7 +82,7 @@ export class SongService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `Backend returned code ${error.status}, ` + `body was: ${error}`
       );
     }
     // Return an observable with a user-facing error message.

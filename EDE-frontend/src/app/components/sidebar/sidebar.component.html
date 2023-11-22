@@ -1,0 +1,153 @@
+<aside
+  #sidebar
+  id="sidebar"
+  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2"
+>
+  <div class="flex flex-col bg-slate-800 p-2 rounded-lg mt-2">
+    <a
+      class="flex p-2 gap-2 h-16 bg-white bg-opacity-10 rounded-md hover:bg-opacity-20 cursor-pointer items-center"
+    >
+      <fa-icon
+        icon="house"
+        class="h-full flex items-center justify-center aspect-square text-2xl"
+      ></fa-icon>
+
+      <h3 class="font-bold">Home</h3>
+    </a>
+  </div>
+
+  <div class="flex flex-col bg-slate-800 p-2 rounded-lg">
+    <header class="flex gap-2 justify-between p-2 text-white/50">
+      <h3 class="text-lg font-bold">Library</h3>
+      <button (click)="openModal()" class="text-2xl">+</button>
+    </header>
+
+    <ul class="flex flex-col gap-2">
+      <app-playlist-card playlistName="Liked Songs"></app-playlist-card>
+      <!-- <app-playlist-card playlistName="Happy Songs"></app-playlist-card>
+      <app-playlist-card playlistName="Sad Songs"></app-playlist-card> -->
+      <app-playlist-card
+        *ngFor="let playlist; in: playlists$ | async"
+        [playlist]="playlist"
+      ></app-playlist-card>
+    </ul>
+  </div>
+  <pre>{{ playlists$ | async | json }}</pre>
+  <!-- <div #handle class="absolute top-0 right-0 w-2 h-full bg-red-500"></div> -->
+</aside>
+<app-modal
+  [showModal]="isModalVisible"
+  title="New playlist"
+  maxWidth="2xl"
+  (closeModal)="closeModal()"
+  class="w-[5000]"
+>
+  <form slot="default" #playlistForm="ngForm">
+    <!-- Display validation errors below the form inputs -->
+    <div
+      *ngIf="playlistForm.invalid && !name.pristine"
+      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-4 rounded relative"
+    >
+      <ul class="list-disc ml-4">
+        <li [hidden]="name.valid || name.pristine">Title is required</li>
+        <!--  <li
+          [hidden]="
+            model.activityTypeId != -1 &&
+            (customActivityType.valid || customActivityType.pristine)
+          "
+        >
+          Custom category name is required
+        </li> -->
+      </ul>
+    </div>
+    <!-- <pre>{{ model | json }}</pre> -->
+    <div class="flex flex-col sm:flex-row sm:gap-4 relative">
+      <div class="mb-4 sm:w-[70%]">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+          Name
+        </label>
+        <input
+          #name="ngModel"
+          class="shadow appearance-none bg-slate-50 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="title"
+          type="text"
+          name="title"
+          placeholder="Happy playlist"
+          required
+          [(ngModel)]="model.name"
+        />
+      </div>
+      <!--       <div class="mb-4 sm:w-[30%]">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="cost">
+          Cost
+        </label>
+        <input
+          #cost="ngModel"
+          class="shadow appearance-none bg-slate-50 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="cost"
+          type="number"
+          name="cost"
+          placeholder="50,00"
+          step=".01"
+          min="0"
+          [(ngModel)]="model.cost"
+        />
+      </div> -->
+    </div>
+
+    <!--  <div class="flex flex-col sm:flex-row sm:gap-4 relative">
+      <div class="flex flex-col relative sm:w-[50%]">
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="activityTypeId"
+          >
+            Category
+          </label>
+          <select
+            #activityTypeId="ngModel"
+            [(ngModel)]="model.activityTypeId"
+            name="activityTypeId"
+            id="activityTypeId"
+            class="shadow border bg-slate-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option [value]="0">None</option>
+            <option
+              [value]="activityType.id"
+              *ngFor="let activityType of activityTypes$ | async"
+            >
+              {{ activityType.name }}
+            </option>
+            <option [value]="-1">Custom</option>
+          </select>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm mb-2 font-bold"
+        for="description"
+      >
+        Description
+      </label>
+      <textarea
+        #description="ngModel"
+        [(ngModel)]="model.description"
+        name="description"
+        id="description"
+        rows="4"
+        class="shadow border bg-slate-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      ></textarea>
+    </div>
+  </form>
+  <footer footer class="mt-4 flex gap-2 justify-end">
+    <app-button
+      color="success"
+      (click)="createPlaylist()"
+      [disabled]="playlistForm.invalid!"
+      >Create</app-button
+    >
+    <app-button (click)="closeModal()">Close</app-button>
+  </footer>
+</app-modal>
