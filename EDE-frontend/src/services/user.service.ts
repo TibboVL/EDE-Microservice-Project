@@ -68,8 +68,8 @@ export class UserService {
                 lastname: decodedToken.family_name,
                 dateOfBirth: format(Date.now(), 'yyyy-MM-dd'),
               }).subscribe((result) => {
-                this.user.id == result.id;
-                // console.log(result);
+                this.user.id = result.id;
+                this.user$.next(this.user);
               });
               // Handle the case where the user is not found, e.g., display a message or redirect to a registration page
               return throwError('User not found.');
@@ -81,8 +81,9 @@ export class UserService {
         )
         .subscribe((result) => {
           console.log('user already in db:');
-          this.user.id == result.id;
-          // console.log(result);
+          this.user.id = result.id;
+          console.log(result.id);
+          this.user$.next(this.user);
         });
     }
   }

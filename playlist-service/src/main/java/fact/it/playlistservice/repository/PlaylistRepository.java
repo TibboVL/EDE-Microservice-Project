@@ -9,4 +9,5 @@ import java.util.List;
 public interface PlaylistRepository extends MongoRepository<Playlist, String> {
     // get a users playlists
     List<Playlist> findAllByUserId(String userId);
+    List<Playlist> findAllById(String id);
 }

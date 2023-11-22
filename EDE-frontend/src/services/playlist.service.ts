@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { Playlist } from 'src/app/models/playlist';
@@ -11,12 +11,18 @@ import { environment } from 'src/environments/environment.development';
 export class PlaylistService {
   private baseUrl = environment.apiBaseURL + 'playlist';
 
+  @Output() playlistsModified = new EventEmitter();
+
   constructor(private http: HttpClient, private oauthService: OAuthService) {}
 
   private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: 'Bearer ' + this.oauthService.getIdToken(),
-    });
+    if (this.oauthService.getIdToken() != null) {
+      return new HttpHeaders({
+        Authorization: 'Bearer ' + this.oauthService.getIdToken(),
+      });
+    } else {
+      throw console.error('TOKEN NOT LOADED');
+    }
   }
 
   createPlaylist(playlistRequest: any): Observable<any> {
@@ -47,9 +53,13 @@ export class PlaylistService {
   }
 
   getMyFavoritesPlaylist(userId: string): Observable<Playlist> {
-    return this.http.post<any>(`${this.baseUrl}/${userId}`, {
-      headers: this.getHeaders(),
-    });
+    return this.http.post<any>(
+      `${this.baseUrl}/${userId}`,
+      {},
+      {
+        headers: this.getHeaders(),
+      }
+    );
   }
 
   getPlaylistFromUser(userId: string): Observable<Playlist[]> {

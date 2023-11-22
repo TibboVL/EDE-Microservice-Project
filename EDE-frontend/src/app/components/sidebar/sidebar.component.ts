@@ -9,7 +9,8 @@ import { ListType, Playlist, PlaylistFormModel } from 'src/app/models/playlist';
 import { ButtonComponent } from '../button/button.component';
 import { ModalComponent } from '../modal/modal.component';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,6 +25,7 @@ import { RouterLink } from '@angular/router';
     ModalComponent,
     FormsModule,
     RouterLink,
+    RouterModule,
   ],
 })
 export class SidebarComponent {
@@ -31,6 +33,7 @@ export class SidebarComponent {
   favoritesPlaylist$: Observable<Playlist> = new Observable<Playlist>();
   public isModalVisible: boolean = false;
   public model!: PlaylistFormModel;
+  private user!: any;
 
   constructor(
     private playlistService: PlaylistService,
@@ -40,8 +43,8 @@ export class SidebarComponent {
   ngOnInit() {
     this.userService.user$.subscribe((user) => {
       if (user) {
-        const userId = user.sub;
-        this.playlists$ = this.playlistService.getPlaylistFromUser(userId);
+        // const userId = user.sub;
+        this.playlists$ = this.playlistService.getPlaylistFromUser(user.sub);
 
         this.model = {
           name: '',
@@ -50,9 +53,16 @@ export class SidebarComponent {
           isPublic: false,
           listType: ListType.playlist,
         };
+        this.user = this.model;
 
-        this.favoritesPlaylist$ =
-          this.playlistService.getMyFavoritesPlaylist(userId);
+        console.log(user);
+        this.favoritesPlaylist$ = this.playlistService.getMyFavoritesPlaylist(
+          user.id
+        );
+
+        this.playlistService.playlistsModified.subscribe(() => {
+          this.playlists$ = this.playlistService.getPlaylistFromUser(user.sub);
+        });
       }
     });
   }
@@ -76,6 +86,7 @@ export class SidebarComponent {
     this.playlistService.createPlaylist(this.model).subscribe((result) => {
       console.log(`create playlist ${this.model.name}`);
       this.closeModal();
+      this.playlistService.playlistsModified.emit();
     });
   }
 }

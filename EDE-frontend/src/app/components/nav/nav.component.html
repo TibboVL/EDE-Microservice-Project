@@ -1,5 +1,5 @@
 <nav class="flex w-full bg-neutral-800 text-neutral-400 h-14 fixed z-50 top-0">
-  <div class="container mx-auto flex justify-between items-center h-full">
+  <div class="container mx-auto flex justify-between items-center h-full px-4">
     <h2 class="text-xl font-bold">EDE-Project</h2>
     <div *ngIf="devMode" class="opacity-50">
       <p class="text-center font-bold hidden sm:block md:hidden">SM (640px+)</p>
@@ -20,7 +20,7 @@
       <div class="h-full w-fit flex relative">
         <!-- <pre>{{ user | json }}</pre> -->
         <div id="userProfile" class="h-full flex gap-4 items-center">
-          <h3 class="hidden md:block">{{ user.username }}</h3>
+          <!-- <h3 class="hidden md:block">{{ user.username }}</h3> -->
           <img
             [src]="user.picture"
             (click)="dropdownExpanded = !dropdownExpanded"
@@ -43,7 +43,10 @@
               {{ user.email }}
             </p>
             <p class="text-sm text-red-400 break-all" *ngIf="devMode">
-              user id: {{ user.sub }}
+              auth user id: {{ user.sub }}
+            </p>
+            <p class="text-sm text-red-400 break-all" *ngIf="devMode">
+              DB user id: {{ user.id }}
             </p>
           </header>
 

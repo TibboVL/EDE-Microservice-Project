@@ -58,7 +58,7 @@ public class PlaylistService {
             playlistRepository.save(playlist);
             return new ResponseEntity<>(mapToPlaylistResponse(playlist), HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(mapToPlaylistResponse(playlistRepository.findAllByUserId(userId).stream().findFirst().get()), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(mapToPlaylistResponse(playlistRepository.findAllByUserId(userId).stream().findFirst().get()), HttpStatus.OK);
         }
     }
 
@@ -72,7 +72,12 @@ public class PlaylistService {
     }
 
     public ResponseEntity<List<PlaylistResponse>> getUserPlaylists(String userId) {
-        List<Playlist> playlists = playlistRepository.findAllByUserId(userId);
+        //List<Playlist> playlists = playlistRepository.findAllByUserId(userId).stream().anyMatch(playlist -> !(playlist.getIsFavorite()));
+        List<Playlist> playlists = playlistRepository.findAllByUserId(userId)
+                .stream()
+                .filter(playlist -> !Boolean.TRUE.equals(playlist.getIsFavorite()))
+                .toList();
+
         if (playlists.size() < 1) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

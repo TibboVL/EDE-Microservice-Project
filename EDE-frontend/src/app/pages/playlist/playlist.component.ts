@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { PlaylistService } from 'src/services/playlist.service';
 import { UserService } from 'src/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-playlist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss'],
   host: {
@@ -33,6 +34,13 @@ export class PlaylistComponent {
       if (playlistId) {
         this.playlist$ = this.playlistService.getPlaylist(playlistId);
       }
+    });
+  }
+
+  deletePlaylist() {
+    this.playlistService.deletePlaylist(this.playlistId).subscribe((result) => {
+      console.log(result);
+      this.playlistService.playlistsModified.emit();
     });
   }
 }
