@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
+import { Playlist } from 'src/app/models/playlist';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -19,15 +20,23 @@ export class PlaylistService {
   }
 
   createPlaylist(playlistRequest: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, playlistRequest);
+    return this.http.post<any>(this.baseUrl, playlistRequest, {
+      headers: this.getHeaders(),
+    });
   }
 
   getPlaylist(playlistId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${playlistId}`);
+    return this.http.get<any>(`${this.baseUrl}/${playlistId}`, {
+      headers: this.getHeaders(),
+    });
   }
 
   updatePlaylist(playlistId: string, playlistRequest: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${playlistId}`, playlistRequest);
+    return this.http.put<any>(
+      `${this.baseUrl}/${playlistId}`,
+      playlistRequest,
+      { headers: this.getHeaders() }
+    );
   }
 
   deletePlaylist(playlistId: string): Observable<any> {
@@ -37,7 +46,15 @@ export class PlaylistService {
     });
   }
 
-  getPlaylistFromUser(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/user/${userId}`);
+  getMyFavoritesPlaylist(userId: string): Observable<Playlist> {
+    return this.http.post<any>(`${this.baseUrl}/${userId}`, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  getPlaylistFromUser(userId: string): Observable<Playlist[]> {
+    return this.http.get<any>(`${this.baseUrl}/user/${userId}`, {
+      headers: this.getHeaders(),
+    });
   }
 }

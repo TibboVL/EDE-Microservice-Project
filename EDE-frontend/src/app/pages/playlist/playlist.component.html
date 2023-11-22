@@ -1,1 +1,21 @@
-<p>playlist works!</p>
+<section
+  *ngIf="playlist$ | async as playlist"
+  id="playlistOverview"
+  class="@container flex flex-col gap-2 mt-2"
+>
+  <div class="bg-slate-800 rounded-lg h-full flex flex-col gap-2 mt-2 p-2">
+    <h2 class="text-blue-200 text-3xl my-2">{{ playlist.name }}</h2>
+
+    <p>{{ playlist.description }}</p>
+    <p>{{ playlist.isPublic }}</p>
+
+    <div
+      class="grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
+    >
+      <!--       <app-song-card
+          *ngFor="let song of songs$ | async"
+          [song]="song"
+        ></app-song-card> -->
+    </div>
+  </div>
+</section>

@@ -6,11 +6,7 @@
   <div class="img-container relative aspect-square w-full flex">
     <img
       class="aspect-square rounded-xl object-cover"
-      [src]="
-        song.coverArt == null
-          ? 'https://source.unsplash.com/random?sig=' + getRandomNumber()
-          : song.coverArt
-      "
+      [src]="getCoverArtUrl()"
       [alt]="song.title + ' cover'"
     />
     <p

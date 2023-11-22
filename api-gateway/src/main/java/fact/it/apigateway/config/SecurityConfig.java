@@ -22,6 +22,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
+                .csrf(csrfSpec -> csrfSpec.disable()) // Disable CSRF protection for frontend
                 .authorizeExchange(exchange ->
                         exchange.pathMatchers(HttpMethod.GET, "/song/{id}", "/playlist/{id}")
                                 .permitAll()

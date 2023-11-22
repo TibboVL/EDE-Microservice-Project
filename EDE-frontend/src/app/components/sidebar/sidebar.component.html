@@ -1,10 +1,11 @@
 <aside
   #sidebar
   id="sidebar"
-  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2"
+  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2 mt-2"
 >
   <div class="flex flex-col bg-slate-800 p-2 rounded-lg mt-2">
     <a
+      [routerLink]="'/home/'"
       class="flex p-2 gap-2 h-16 bg-white bg-opacity-10 rounded-md hover:bg-opacity-20 cursor-pointer items-center"
     >
       <fa-icon
@@ -23,19 +24,26 @@
     </header>
 
     <ul class="flex flex-col gap-2">
-      <app-playlist-card playlistName="Liked Songs"></app-playlist-card>
+      <pre>{{ favoritesPlaylist$ | async | json }}</pre>
+
+      <app-playlist-card
+        *ngIf="favoritesPlaylist$ | async"
+        [playlist]="(favoritesPlaylist$ | async)!"
+      ></app-playlist-card>
       <!-- <app-playlist-card playlistName="Happy Songs"></app-playlist-card>
       <app-playlist-card playlistName="Sad Songs"></app-playlist-card> -->
-      <app-playlist-card
-        *ngFor="let playlist; in: playlists$ | async"
-        [playlist]="playlist"
-      ></app-playlist-card>
+      @for (playlist of playlists$ |async; track $index) {
+      <app-playlist-card [playlist]="playlist"></app-playlist-card>
+      } @empty {
+      <p>You don't have any playlists yet!</p>
+      }
     </ul>
   </div>
-  <pre>{{ playlists$ | async | json }}</pre>
+  <!-- <pre>{{ playlists$ | async | json }}</pre> -->
   <!-- <div #handle class="absolute top-0 right-0 w-2 h-full bg-red-500"></div> -->
 </aside>
 <app-modal
+  *ngIf="isModalVisible"
   [showModal]="isModalVisible"
   title="New playlist"
   maxWidth="2xl"

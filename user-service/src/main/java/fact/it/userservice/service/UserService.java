@@ -42,6 +42,7 @@ public class UserService {
 
     public ResponseEntity<UserResponse> createUser(UserRequest userRequest) {
         User user = User.builder()
+                .userId(userRequest.getUserId())
                 .firstname(userRequest.getFirstname())
                 .lastname(userRequest.getLastname())
                 .username(userRequest.getUsername())
@@ -56,6 +57,15 @@ public class UserService {
 
     public ResponseEntity<UserResponse> getUser(String userId) {
         Optional<User> optionalRating = userRepository.findById(userId);
+        if (optionalRating.isPresent()) {
+            return new ResponseEntity<>(mapToUserResponse(optionalRating.get()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<UserResponse> checkExistenceUser(String userId) {
+        Optional<User> optionalRating = userRepository.findFirstByUserId(userId);
         if (optionalRating.isPresent()) {
             return new ResponseEntity<>(mapToUserResponse(optionalRating.get()), HttpStatus.OK);
         } else {
@@ -99,6 +109,7 @@ public class UserService {
     private UserResponse mapToUserResponse(User user) {
         return UserResponse.builder()
                 .id(user.getId())
+                .userId(user.getUserId())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
                 .username(user.getUsername())

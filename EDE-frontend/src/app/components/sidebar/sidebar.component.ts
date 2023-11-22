@@ -9,6 +9,7 @@ import { ListType, Playlist, PlaylistFormModel } from 'src/app/models/playlist';
 import { ButtonComponent } from '../button/button.component';
 import { ModalComponent } from '../modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,10 +23,12 @@ import { FormsModule } from '@angular/forms';
     ButtonComponent,
     ModalComponent,
     FormsModule,
+    RouterLink,
   ],
 })
 export class SidebarComponent {
   playlists$: Observable<Playlist[]> = new Observable<Playlist[]>();
+  favoritesPlaylist$: Observable<Playlist> = new Observable<Playlist>();
   public isModalVisible: boolean = false;
   public model!: PlaylistFormModel;
 
@@ -47,6 +50,9 @@ export class SidebarComponent {
           isPublic: false,
           listType: ListType.playlist,
         };
+
+        this.favoritesPlaylist$ =
+          this.playlistService.getMyFavoritesPlaylist(userId);
       }
     });
   }

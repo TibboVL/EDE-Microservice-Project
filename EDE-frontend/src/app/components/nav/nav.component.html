@@ -12,21 +12,76 @@
       </p>
       <p class="text-center font-bold hidden 2xl:block">2XL (1536px+)</p>
     </div>
-    <div
+    <article
+      *ngIf="isAuthenticated; else loginButton"
+      #profile
+      class="h-full py-2"
+    >
+      <div class="h-full w-fit flex relative">
+        <!-- <pre>{{ user | json }}</pre> -->
+        <div id="userProfile" class="h-full flex gap-4 items-center">
+          <h3 class="hidden md:block">{{ user.username }}</h3>
+          <img
+            [src]="user.picture"
+            (click)="dropdownExpanded = !dropdownExpanded"
+            class="h-full w-auto rounded-full"
+            [alt]="user.name + '\'s profile picture'"
+          />
+        </div>
+        <div
+          id="userProfileDropdown"
+          *ngIf="dropdownExpanded"
+          class="w-48 shadow-xl absolute flex flex-col mb-12 mt-12 z-50 right-0 bg-gray-700 rounded-xl border border-gray-800"
+        >
+          <header
+            class="flex w-full items-center overflow-hidden justify-between flex-col gap-2 p-4 border-b-2 border-gray-500"
+          >
+            <h3 class="font-bold">{{ user.username }}</h3>
+            <p
+              class="w-full text-gray-500 text-xs overflow-hidden text-ellipsis"
+            >
+              {{ user.email }}
+            </p>
+            <p class="text-sm text-red-400 break-all" *ngIf="devMode">
+              user id: {{ user.sub }}
+            </p>
+          </header>
+
+          <div class="flex flex-col justify-start">
+            <button
+              class="p-4 text-left bg-slate-800 bg-opacity-0 hover:bg-opacity-20"
+            >
+              My profile
+            </button>
+            <button
+              class="p-4 text-left bg-slate-800 bg-opacity-0 hover:bg-opacity-20"
+            >
+              Settings
+            </button>
+            <button
+              class="p-4 text-left bg-slate-800 bg-opacity-0 hover:bg-opacity-20"
+              (click)="logout()"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <!--     <div
       *ngIf="isAuthenticated; else loginButton"
       class="flex gap-4 h-full py-2 items-center"
     >
-      <!-- Your authenticated content goes here -->
       <img
         class="h-full aspect-square rounded-full"
         [src]="user.picture"
-        [alt]="user.name + '\'s profile picture'"
+        [alt]="user.username + '\'s profile picture'"
       />
 
-      <p>Welcome {{ user.name }}</p>
+      <p>Welcome {{ user.username }}</p>
       <p>{{ user.email }}</p>
       <button (click)="logout()">Logout</button>
-    </div>
+    </div> -->
     <ng-template #loginButton>
       <button (click)="login()">Login</button>
     </ng-template>

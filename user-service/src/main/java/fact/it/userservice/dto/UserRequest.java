@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
+    private String userId;
     private String firstname;
     private String  lastname;
     private String  username;

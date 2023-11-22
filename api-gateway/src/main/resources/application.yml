@@ -49,6 +49,13 @@ spring:
             - Method=GET 
           filters:
             - SetPath=/api/user/{id}
+        - id: check if user exists based on OAuthID
+          uri: http://${USER_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/user/checkExistence/{id}
+            - Method=GET
+          filters:
+            - SetPath=/api/user/checkExistence/{id}
         - id: create-user
           uri: http://${USER_SERVICE_BASEURL:localhost:8081}
           predicates:
@@ -130,6 +137,13 @@ spring:
             - Method=POST 
           filters:
             - SetPath=/api/playlist/{id}
+        - id: get a users playlists
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/playlist/user/{id}
+            - Method=GET
+          filters:
+            - SetPath=/api/playlist/user/{id}
         - id: create-playlist
           uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8083}
           predicates:

@@ -13,12 +13,23 @@ import { SongService } from 'src/services/song.service';
   styleUrls: ['./song-card.component.scss'],
 })
 export class SongCardComponent {
+  @Input() song!: Song;
+  private randomNumber!: number;
+
   constructor(private songService: SongService) {}
 
-  @Input() song!: Song;
+  ngOnInit() {
+    this.randomNumber = this.getRandomNumber();
+  }
 
   getRandomNumber() {
     return Math.floor(Math.random() * 100);
+  }
+
+  getCoverArtUrl(): string {
+    return this.song.coverArt == null
+      ? 'https://source.unsplash.com/random?sig=' + this.randomNumber
+      : this.song.coverArt;
   }
 
   delete(songId: string) {

@@ -29,6 +29,11 @@ public class UserController {
         return userService.getUser(userId);
     }
 
+    @GetMapping("/checkExistence/{id}")
+    public ResponseEntity<UserResponse> checkExistenceUser(@PathVariable("id") String authUserId) {
+        return userService.checkExistenceUser(authUserId);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable("id") String userId, @RequestBody UserRequest userRequest) {
         return userService.updateUser(userId, userRequest);

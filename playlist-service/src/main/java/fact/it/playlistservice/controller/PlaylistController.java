@@ -25,7 +25,7 @@ public class PlaylistController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<String> createMyFavorites(@PathVariable("id") String userId) {
+    public ResponseEntity<PlaylistResponse> createMyFavorites(@PathVariable("id") String userId) {
         return playlistService.createMyFavorites(userId);
     }
 
