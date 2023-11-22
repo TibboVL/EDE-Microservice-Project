@@ -24,11 +24,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss",
-              "@shoelace-style/shoelace/dist/themes/light.css"
-            ],
-            "scripts": ["@shoelace-style/shoelace/dist/shoelace.js"]
+            "styles": ["src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
