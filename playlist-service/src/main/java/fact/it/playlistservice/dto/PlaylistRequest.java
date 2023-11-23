@@ -1,5 +1,6 @@
 package fact.it.playlistservice.dto;
 
+import fact.it.playlistservice.model.ListType;
 import fact.it.playlistservice.model.PartialSong;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ public class PlaylistRequest {
     private String description;
     private Boolean isPublic;
     private Boolean isFavorite;
-
+    private ListType listType;
     private List<PartialSong> songs; // List of song IDs associated with the playlist (stored as strings)
 
 }

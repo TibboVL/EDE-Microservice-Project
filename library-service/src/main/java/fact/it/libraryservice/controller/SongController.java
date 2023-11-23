@@ -40,12 +40,16 @@ public class SongController {
         return songService.deleteSong(songId);
     }
 
+    @GetMapping("/top/{count}")
+    public List<SongResponse> getTopX(@PathVariable("count") int count) {
+        return songService.getTopSongs(count);
+    }
+
     // dev purposes
     @GetMapping("/all")
     public List<SongResponse> getAllSongs() {
         return songService.getAllSongs();
     }
-
     @GetMapping("/dummyData")
     public ResponseEntity<Long> addDummyData() {
         return songService.addDummyData();

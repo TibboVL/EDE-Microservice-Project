@@ -17,7 +17,7 @@ import { UserService } from 'src/services/user.service';
   },
 })
 export class HomeComponent {
-  songs$: Observable<Song[]> = new Observable<Song[]>();
+  popularSongs$: Observable<Song[]> = new Observable<Song[]>();
 
   constructor(
     private songService: SongService,
@@ -25,6 +25,6 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    this.songs$ = this.songService.getAllSongs();
+    this.popularSongs$ = this.songService.getTopSongs(5);
   }
 }

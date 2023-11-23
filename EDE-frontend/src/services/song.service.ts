@@ -7,6 +7,7 @@ import { Token } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable, catchError, throwError } from 'rxjs';
+import { Song } from 'src/app/models/song';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -52,6 +53,12 @@ export class SongService {
     return this.http
       .get<any>(`${this.baseUrl}/all`)
       .pipe(catchError(this.handleError));
+  }
+
+  getTopSongs(count: number): Observable<Song[]> {
+    return this.http.get<any>(`${this.baseUrl}/top/${count}`, {
+      headers: this.getHeaders(),
+    });
   }
 
   addDummyData(): Observable<any> {

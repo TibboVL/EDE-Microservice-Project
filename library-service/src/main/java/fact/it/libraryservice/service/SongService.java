@@ -348,6 +348,16 @@ public class SongService {
         }
     }
 
+    public List<SongResponse> getTopSongs(int count) {
+        List<Song> songs = songRepository.findAll();
+        Collections.shuffle(songs);
+        if (count > songs.size()) {
+            count = songs.size();
+        }
+        List<Song> topSongs = songs.subList(0, count );
+        return topSongs.stream().map(this::mapToSongResponse).toList();
+    }
+
     public List<SongResponse> getAllSongs() {
         List<Song> songs = songRepository.findAll();
         return songs.stream().map(this::mapToSongResponse).toList();

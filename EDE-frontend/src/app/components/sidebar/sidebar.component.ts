@@ -55,7 +55,7 @@ export class SidebarComponent {
         };
         this.user = this.model;
 
-        console.log(user);
+        //console.log(user);
         this.favoritesPlaylist$ = this.playlistService.getMyFavoritesPlaylist(
           user.id
         );
@@ -85,8 +85,12 @@ export class SidebarComponent {
 
     this.playlistService.createPlaylist(this.model).subscribe((result) => {
       console.log(`create playlist ${this.model.name}`);
-      this.closeModal();
       this.playlistService.playlistsModified.emit();
+      this.closeModal();
+
+      this.model.name = '';
+      this.model.description = '';
+      this.user = this.model;
     });
   }
 }

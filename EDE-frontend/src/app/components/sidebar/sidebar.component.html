@@ -1,7 +1,7 @@
 <aside
   #sidebar
   id="sidebar"
-  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2 mt-2 sm:ml-2"
+  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2 mt-2 sm:ml-2 overflow-hidden"
 >
   <div class="flex flex-col bg-slate-800 p-2 rounded-lg mt-2">
     <a
@@ -18,13 +18,13 @@
     </a>
   </div>
 
-  <div class="flex flex-col bg-slate-800 p-2 rounded-lg grow">
+  <div class="flex flex-col bg-slate-800 p-2 rounded-lg grow overflow-hidden">
     <header class="flex gap-2 justify-between p-2 text-white/50">
       <h3 class="text-lg font-bold">Library</h3>
       <button (click)="openModal()" class="text-2xl">+</button>
     </header>
 
-    <ul class="flex flex-col gap-2">
+    <ul id="playlistContainer" class="flex flex-col gap-2 overflow-y-auto">
       <!-- <pre>{{ favoritesPlaylist$ | async | json }}</pre> -->
 
       <app-playlist-card
@@ -36,7 +36,7 @@
       @for (playlist of playlists$ |async; track $index) {
       <app-playlist-card [playlist]="playlist"></app-playlist-card>
       } @empty {
-      <p>You don't have any playlists yet!</p>
+      <p class="text-center font-semibold">You don't have any playlists yet!</p>
       }
     </ul>
   </div>

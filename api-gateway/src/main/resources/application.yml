@@ -86,6 +86,13 @@ spring:
             - Method=GET 
           filters:
             - SetPath=/api/library/song/all
+        - id: get a chosen amount of songs
+          uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/song/top/{count}
+            - Method=GET
+          filters:
+            - SetPath=/api/library/song/top/{count}
         - id: add dummy songs
           uri: http://${LIBRARY_SERVICE_BASEURL:localhost:8082}
           predicates:

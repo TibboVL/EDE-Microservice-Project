@@ -3,6 +3,7 @@ package fact.it.playlistservice.service;
 import fact.it.playlistservice.dto.PlaylistRequest;
 import fact.it.playlistservice.dto.PlaylistResponse;
 import fact.it.playlistservice.dto.SongResponse;
+import fact.it.playlistservice.model.ListType;
 import fact.it.playlistservice.model.PartialSong;
 import fact.it.playlistservice.model.Playlist;
 import fact.it.playlistservice.repository.PlaylistRepository;
@@ -35,6 +36,7 @@ public class PlaylistService {
                 .userId(playlistRequest.getUserId())
                 .description(playlistRequest.getDescription())
                 .isPublic(playlistRequest.getIsPublic())
+                .listType(playlistRequest.getListType())
                 .songs(new ArrayList<>())
                 .build();
 
@@ -53,6 +55,7 @@ public class PlaylistService {
                     .description("")
                     .isPublic(false)
                     .isFavorite(true)
+                    .listType(ListType.playlist)
                     .songs(new ArrayList<>())
                     .build();
             playlistRepository.save(playlist);
@@ -188,6 +191,7 @@ public class PlaylistService {
                 .name(playlist.getName())
                 .description(playlist.getDescription())
                 .songs(playlist.getSongs())
+                .listType(playlist.getListType())
                 .isPublic(playlist.getIsPublic())
                 .isFavorite(playlist.getIsFavorite())
                 .build();
