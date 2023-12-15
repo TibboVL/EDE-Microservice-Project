@@ -73,7 +73,7 @@ class PlaylistServiceUnitTests {
         String userId = "1";
 
         // Act
-        ResponseEntity<String> responseEntity = playlistService.createMyFavorites(userId);
+        ResponseEntity<PlaylistResponse> responseEntity = playlistService.createMyFavorites(userId);
 
         // Assert
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
@@ -91,7 +91,7 @@ class PlaylistServiceUnitTests {
         // Mocking the behavior of the getUserPlaylists method
         when(playlistRepository.findAllByUserId(userId)).thenReturn(existingPlaylists);
         // Act
-        ResponseEntity<String> responseEntity = playlistService.createMyFavorites(userId);
+        ResponseEntity<PlaylistResponse> responseEntity = playlistService.createMyFavorites(userId);
 
         // Assert
         assertEquals(HttpStatus.FORBIDDEN, responseEntity.getStatusCode());
