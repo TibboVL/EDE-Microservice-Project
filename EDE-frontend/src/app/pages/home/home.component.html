@@ -1,18 +1,28 @@
-<section class="bg-slate-900 @container w-full">
+<section class="bg-slate-900 w-full">
+  <!-- @container -->
   <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">
     Good afternoon {{ (userService.user$ | async).username }}
   </h2>
+  @if (playlists$ | async ) {
 
   <article>
     <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">Popular</h2>
-
+    <!-- 
     <div
       class="overflow-hidden grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
+    > -->
+    <div
+      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
     >
+      @for (song of popularSongs$ | async; track $index) {
+
       <app-song-card
-        *ngFor="let song of popularSongs$ | async"
+        [playlists]="playlists$ | async"
+        [favoritesPlaylist]="favoritesPlaylist$ | async"
         [song]="song"
-      ></app-song-card>
+      >
+      </app-song-card>
+      }
     </div>
   </article>
   <article>
@@ -21,24 +31,35 @@
     </h2>
 
     <div
-      class="overflow-hidden grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
+      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
     >
+      @for (song of popularSongs$ | async; track $index) {
+
       <app-song-card
-        *ngFor="let song of popularSongs$ | async"
+        [playlists]="playlists$ | async"
+        [favoritesPlaylist]="favoritesPlaylist$ | async"
         [song]="song"
-      ></app-song-card>
+      ></app-song-card
+      >}
     </div>
   </article>
   <article>
     <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">Happy songs</h2>
-
     <div
-      class="overflow-hidden grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
+      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
     >
+      @for (song of popularSongs$ | async; track $index) {
+
       <app-song-card
-        *ngFor="let song of popularSongs$ | async"
+        [playlists]="playlists$ | async"
+        [favoritesPlaylist]="favoritesPlaylist$ | async"
         [song]="song"
       ></app-song-card>
+      }
     </div>
   </article>
+  } @else {
+  <h2 class="text-blue-200 text-xl mt-10 mb-7 mx-2">Loading...</h2>
+
+  }
 </section>

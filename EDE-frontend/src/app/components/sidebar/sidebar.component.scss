@@ -1,5 +1,7 @@
 #sidebar {
   height: calc(100vh - 56px);
+  min-width: 14rem;
+  max-width: 30vw;
 }
 
 #playlistContainer {

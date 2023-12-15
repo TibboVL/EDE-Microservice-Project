@@ -1,7 +1,7 @@
 <aside
   #sidebar
   id="sidebar"
-  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2 mt-2 sm:ml-2 overflow-hidden"
+  class="text-white w-64 resize-x overflow-auto sticky top-14 flex flex-col gap-2 mt-2 sm:ml-2"
 >
   <div class="flex flex-col bg-slate-800 p-2 rounded-lg mt-2">
     <a
@@ -28,8 +28,8 @@
       <!-- <pre>{{ favoritesPlaylist$ | async | json }}</pre> -->
 
       <app-playlist-card
-        *ngIf="favoritesPlaylist$ | async"
-        [playlist]="(favoritesPlaylist$ | async)!"
+        *ngIf="favoritesPlaylis$ | async"
+        [playlist]="(favoritesPlaylis$ | async)!"
       ></app-playlist-card>
       <!-- <app-playlist-card playlistName="Happy Songs"></app-playlist-card>
       <app-playlist-card playlistName="Sad Songs"></app-playlist-card> -->
@@ -47,7 +47,7 @@
   *ngIf="isModalVisible"
   [showModal]="isModalVisible"
   title="New playlist"
-  maxWidth="2xl"
+  maxWidth="sm"
   (closeModal)="closeModal()"
   class="w-[5000]"
 >
@@ -71,7 +71,7 @@
     </div>
     <!-- <pre>{{ model | json }}</pre> -->
     <div class="flex flex-col sm:flex-row sm:gap-4 relative">
-      <div class="mb-4 sm:w-[70%]">
+      <div class="mb-4 w-full">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
           Name
         </label>
@@ -104,34 +104,26 @@
       </div> -->
     </div>
 
-    <!--  <div class="flex flex-col sm:flex-row sm:gap-4 relative">
+    <div class="flex flex-col sm:flex-row sm:gap-4 relative">
       <div class="flex flex-col relative sm:w-[50%]">
         <div class="mb-4">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
             for="activityTypeId"
           >
-            Category
+            Make public
           </label>
-          <select
-            #activityTypeId="ngModel"
-            [(ngModel)]="model.activityTypeId"
+          <input
+            type="checkbox"
+            #isPublic="ngModel"
+            [(ngModel)]="model.isPublic"
             name="activityTypeId"
             id="activityTypeId"
             class="shadow border bg-slate-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option [value]="0">None</option>
-            <option
-              [value]="activityType.id"
-              *ngFor="let activityType of activityTypes$ | async"
-            >
-              {{ activityType.name }}
-            </option>
-            <option [value]="-1">Custom</option>
-          </select>
+          />
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="mb-4">
       <label

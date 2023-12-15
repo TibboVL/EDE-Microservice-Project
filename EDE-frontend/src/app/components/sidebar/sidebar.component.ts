@@ -30,7 +30,7 @@ import { User } from 'src/app/models/user';
 })
 export class SidebarComponent {
   playlists$: Observable<Playlist[]> = new Observable<Playlist[]>();
-  favoritesPlaylist$: Observable<Playlist> = new Observable<Playlist>();
+  favoritesPlaylis$: Observable<Playlist> = new Observable<Playlist>();
   public isModalVisible: boolean = false;
   public model!: PlaylistFormModel;
   private user!: any;
@@ -56,7 +56,7 @@ export class SidebarComponent {
         this.user = this.model;
 
         //console.log(user);
-        this.favoritesPlaylist$ = this.playlistService.getMyFavoritesPlaylist(
+        this.favoritesPlaylis$ = this.playlistService.getMyFavoritesPlaylist(
           user.id
         );
 
@@ -90,6 +90,7 @@ export class SidebarComponent {
 
       this.model.name = '';
       this.model.description = '';
+      this.model.isPublic = false;
       this.user = this.model;
     });
   }

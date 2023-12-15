@@ -3,11 +3,12 @@
   id="playlistOverview"
   class="@container flex flex-col gap-2 mt-2"
 >
-  <div class="bg-slate-800 rounded-lg h-full flex flex-col gap-2 mt-2 p-2">
+  <div class="rounded-lg h-full flex flex-col gap-2 mt-2 p-2">
     <div class="flex gap-2 justify-between text-white">
       <h2 class="text-blue-200 text-3xl my-2">
         {{ playlist.name }}
       </h2>
+      <pre>{{ playlist.id }}</pre>
 
       <p>{{ playlist.description }}</p>
       @if (playlist.isPublic) {
@@ -28,13 +29,33 @@
       <button (click)="deletePlaylist()">Delete</button>
     </div>
 
-    <div
-      class="grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
-    >
-      <!--       <app-song-card
-          *ngFor="let song of songs$ | async"
-          [song]="song"
-        ></app-song-card> -->
+    <div class="overflow-y-auto gap-4 w-full">
+      <table class="bg-slate-800 w-full p-4 text-left text-white rounded-lg">
+        <tr class="w-full border-b border-white/50 text-white/50 [&>th]:p-2">
+          <th class="text-center">#</th>
+          <th class="grow">Title</th>
+          <th class="flex items-center justify-center">
+            <fa-icon icon="clock"></fa-icon>
+          </th>
+          <th></th>
+        </tr>
+        @for (song of playlist.songs; track $index) {
+
+        <tr class="w-full [&>td]:p-2">
+          <td class="text-center text-white/50">{{ $index }}</td>
+          <td>{{ song.title }}</td>
+          <td class="text-center">{{ songDurationToMinSec(song.duration) }}</td>
+          <td>
+            <button
+              (click)="removeSongFromPlaylist(song.songId)"
+              class="text-white opacity-50 hover:text-rose-400"
+            >
+              <fa-icon icon="trash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        }
+      </table>
     </div>
   </div>
 </section>

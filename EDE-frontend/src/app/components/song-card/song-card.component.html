@@ -1,7 +1,24 @@
 <article
   class="flex flex-col gap-2 p-4 bg-slate-800 text-blue-50 rounded-xl shadow-lg w-full"
 >
-  <h3 class="text-xl line-clamp-1 overflow-ellipsis">{{ song.title }}</h3>
+  <header class="flex gap-2 justify-between">
+    <h3 class="text-xl line-clamp-1 overflow-ellipsis">{{ song.title }}</h3>
+    <!-- <button (click)="addToPlaylist(song.id)">
+      <fa-icon icon="plus" class="text-sm"></fa-icon>
+    </button> -->
+    <div class="flex gap-2">
+      <button (click)="openModal(song.id)">
+        <fa-icon icon="plus" class=""></fa-icon>
+      </button>
+      <button (click)="addToFavorites(song.id)" class="heart-button">
+        @if (inFavorites | async) {
+        <fa-icon icon="heart" class="text-sky-600 heart-pop"></fa-icon>
+        } @else {
+        <fa-icon [icon]="['far', 'heart']" class="text-sky-600"></fa-icon>
+        }
+      </button>
+    </div>
+  </header>
   <!-- <button (click)="delete(song.id)">DELETE</button> -->
   <div class="img-container relative aspect-square w-full flex">
     <img
@@ -27,3 +44,43 @@
     <p><fa-icon icon="music" class="text-sm"></fa-icon> {{ song.plays }}</p>
   </footer>
 </article>
+<app-modal
+  *ngIf="isModalVisible"
+  [showModal]="isModalVisible"
+  title="Add number to playlist"
+  maxWidth="sm"
+  (closeModal)="closeModal()"
+  class="w-[5000]"
+>
+  <div
+    name="activityTypeId"
+    id="activityTypeId"
+    class="flex flex-col gap-2 mb-4"
+  >
+    @if (favoritesPlaylist ) {
+    <button
+      (click)="addToPlaylist(favoritesPlaylist.id)"
+      class="shadow border text-left bg-slate-50 hover:bg-slate-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    >
+      {{ favoritesPlaylist.name }}
+    </button>
+    } @for (playlist of playlists ; track $index) {
+    <button
+      (click)="addToPlaylist(playlist.id)"
+      class="shadow border text-left bg-slate-50 hover:bg-slate-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    >
+      {{ playlist.name }}
+    </button>
+    }
+  </div>
+
+  <footer footer class="mt-4 flex gap-2 justify-end">
+    <!-- <app-button
+      color="success"
+      (click)="createPlaylist()"
+      [disabled]="playlistForm.invalid!"
+      >Create</app-button
+    > -->
+    <app-button (click)="closeModal()">Close</app-button>
+  </footer>
+</app-modal>

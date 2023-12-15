@@ -16,6 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
@@ -114,12 +115,19 @@ public class PlaylistService {
                     .block();
             // check for a 404 reply
             if (optionalSong != null) {
-                PartialSong partialSong = PartialSong.builder()
-                        .title(optionalSong.getTitle())
-                        .duration(optionalSong.getDuration())
-                        .songId(optionalSong.getId())
-                        .build();
+
                 Playlist playlist = optionalPlaylist.get();
+                if (playlist.getSongs().stream().anyMatch(song -> Objects.equals(song.getSongId(), optionalSong.getId()))) {
+                    // song already in playlist dont allow
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
+
+                PartialSong partialSong = PartialSong.builder()
+                    .title(optionalSong.getTitle())
+                    .duration(optionalSong.getDuration())
+                    .songId(optionalSong.getId())
+                    .build();
+
                 playlist.getSongs().add(partialSong);
                 playlistRepository.save(playlist);
                 return new ResponseEntity<>(mapToPlaylistResponse(optionalPlaylist.get()), HttpStatus.OK);
@@ -170,8 +178,13 @@ public class PlaylistService {
     }
 
     public ResponseEntity<PlaylistResponse> deletePlaylist(String playlistId) {
-        Optional<Playlist> optionalSong = playlistRepository.findById(playlistId);
-        if (optionalSong.isPresent()) {
+        Optional<Playlist> optionalPlaylist = playlistRepository.findById(playlistId);
+        if (optionalPlaylist.isPresent()) {
+            Boolean isFavorite = optionalPlaylist.get().getIsFavorite();
+            if(isFavorite != null && isFavorite) {
+                // dont allow deleting my favorites
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
             playlistRepository.deleteById(playlistId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

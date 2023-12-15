@@ -28,3 +28,43 @@
   /*border-radius: 0 0 0 0.5em;*/
   /*border-radius:0 0 0.5em 0;*/
 }
+
+.heart-button:has(.heart-pop) {
+  animation: heartPop 500ms ease-in-out, wiggle 700ms ease-in-out;
+  transition: scale 250ms;
+}
+
+// .heartButton * {
+//   color: red;
+//   transition: color 350ms, transform 250ms;
+// }
+
+@keyframes heartPop {
+  0%,
+  100% {
+    scale: 1;
+  }
+  70% {
+    scale: 2;
+  }
+}
+// @keyframes wiggle {
+//   0%,
+//   100% {
+//     rotate: 0deg;
+//   }
+//   5%,
+//   25%,
+//   45%,
+//   65%,
+//   85% {
+//     rotate: 10deg;
+//   }
+//   15%,
+//   35%,
+//   55%,
+//   75%,
+//   95% {
+//     rotate: -10deg;
+//   }
+// }

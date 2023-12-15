@@ -63,7 +63,7 @@ class PlaylistServiceUnitTests {
         assertEquals(playlistRequest.getName(), responseEntity.getBody().getName());
         assertEquals(playlistRequest.getUserId(), responseEntity.getBody().getUserId());
         assertEquals(playlistRequest.getDescription(), responseEntity.getBody().getDescription());
-        assertFalse(responseEntity.getBody().isPublic()); // by default a new playlist should be private
+        assertFalse(responseEntity.getBody().getIsPublic()); // by default a new playlist should be private
         verify(playlistRepository, times(1)).save(any(Playlist.class));
     }
 
@@ -174,7 +174,7 @@ class PlaylistServiceUnitTests {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(playlistRequest.getName(), responseEntity.getBody().getName());
         assertEquals(playlistRequest.getDescription(), responseEntity.getBody().getDescription());
-        assertEquals(playlistRequest.getIsPublic(), responseEntity.getBody().isPublic());
+        assertEquals(playlistRequest.getIsPublic(), responseEntity.getBody().getIsPublic());
 
         verify(playlistRepository, times(1)).findById(playlistId);
         verify(playlistRepository, times(1)).save(any(Playlist.class));

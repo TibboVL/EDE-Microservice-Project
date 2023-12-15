@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
-import { Playlist } from 'src/app/models/playlist';
+import { Playlist, PlaylistFormModel } from 'src/app/models/playlist';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,8 +25,8 @@ export class PlaylistService {
     }
   }
 
-  createPlaylist(playlistRequest: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, playlistRequest, {
+  createPlaylist(playlistRequest: PlaylistFormModel): Observable<Playlist> {
+    return this.http.post<Playlist>(this.baseUrl, playlistRequest, {
       headers: this.getHeaders(),
     });
   }
@@ -66,5 +66,24 @@ export class PlaylistService {
     return this.http.get<any>(`${this.baseUrl}/user/${userId}`, {
       headers: this.getHeaders(),
     });
+  }
+
+  addSong(playlistId: string, songId: string): Observable<Playlist> {
+    return this.http.put<Playlist>(
+      `${this.baseUrl}/${playlistId}/${songId}`,
+      {},
+      {
+        headers: this.getHeaders(),
+      }
+    );
+  }
+
+  removeSong(playlistId: string, songId: string): Observable<Playlist> {
+    return this.http.delete<Playlist>(
+      `${this.baseUrl}/${playlistId}/${songId}`,
+      {
+        headers: this.getHeaders(),
+      }
+    );
   }
 }

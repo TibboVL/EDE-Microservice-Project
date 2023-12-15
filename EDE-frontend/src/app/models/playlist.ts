@@ -1,3 +1,4 @@
+import { PartialSong } from './partialSong';
 import { Song } from './song';
 
 export interface Playlist {
@@ -8,7 +9,7 @@ export interface Playlist {
   isPublic: boolean;
   isFavorite: boolean;
   listType: ListType;
-  songs: Song[];
+  songs: PartialSong[];
 }
 
 export enum ListType {
