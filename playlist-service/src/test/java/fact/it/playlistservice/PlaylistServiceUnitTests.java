@@ -94,7 +94,8 @@ class PlaylistServiceUnitTests {
         ResponseEntity<PlaylistResponse> responseEntity = playlistService.createMyFavorites(userId);
 
         // Assert
-        assertEquals(HttpStatus.FORBIDDEN, responseEntity.getStatusCode());
+        // expect OK if already exists, expect created if it didnt exist yet
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(playlistRepository, times(0)).save(any(Playlist.class));
         verify(playlistRepository, times(1)).findAllByUserId(userId);
     }
