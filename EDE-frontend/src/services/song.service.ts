@@ -8,7 +8,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Song } from 'src/app/models/song';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

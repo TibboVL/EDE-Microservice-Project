@@ -20,7 +20,7 @@
       <div class="h-full w-fit flex relative">
         <!-- <pre>{{ user | json }}</pre> -->
         <div id="userProfile" class="h-full flex gap-4 items-center">
-          <!-- <h3 class="hidden md:block">{{ user.username }}</h3> -->
+          <h3 class="hidden md:block">{{ user.username }}</h3>
           <img
             [src]="user.picture"
             (click)="dropdownExpanded = !dropdownExpanded"

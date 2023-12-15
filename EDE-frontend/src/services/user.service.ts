@@ -10,7 +10,7 @@ import {
   throwError,
 } from 'rxjs';
 import { User } from 'src/app/models/user';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
