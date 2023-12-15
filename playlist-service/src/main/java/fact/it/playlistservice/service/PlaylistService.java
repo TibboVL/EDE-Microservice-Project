@@ -45,6 +45,7 @@ public class PlaylistService {
     }
 
     public ResponseEntity<PlaylistResponse> createMyFavorites(String userId) {
+
         boolean userHasFavorites = playlistRepository.findAllByUserId(userId).stream().anyMatch(playlist -> playlist.getIsFavorite());
 
         // if user has no favorite playlist add one else send forbidden

@@ -97,7 +97,8 @@ class PlaylistServiceUnitTests {
         // expect OK if already exists, expect created if it didnt exist yet
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(playlistRepository, times(0)).save(any(Playlist.class));
-        verify(playlistRepository, times(1)).findAllByUserId(userId);
+        // will be accessed twice
+        verify(playlistRepository, times(2)).findAllByUserId(userId);
     }
 
     @Test
