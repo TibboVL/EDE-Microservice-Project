@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment.development';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { YouTubePlayer, YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FontAwesomeModule,
     HomeComponent,
     BrowserAnimationsModule,
+    NavbarComponent,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: [

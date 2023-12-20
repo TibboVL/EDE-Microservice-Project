@@ -3,8 +3,8 @@
   <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">
     Good afternoon {{ (userService.user$ | async).username }}
   </h2>
-  @if (playlists$ | async ) {
 
+  @if (playlists$ | async ) {
   <article>
     <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">Popular</h2>
     <!-- 
@@ -12,7 +12,8 @@
       class="overflow-hidden grid gap-4 w-full grid-cols-1 @sm:grid-cols-2 @md:grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-3 @2xl:grid-cols-4 @3xl:grid-cols-4 @4xl:grid-cols-5"
     > -->
     <div
-      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      class="overflow-hidden grid gap-4 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      [class]="sidebarService.collapsed ? 'grid-cols-2' : 'grid-cols-1'"
     >
       @for (song of popularSongs$ | async; track $index) {
 
@@ -31,7 +32,8 @@
     </h2>
 
     <div
-      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      class="overflow-hidden grid gap-4 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      [class]="sidebarService.collapsed ? 'grid-cols-2' : 'grid-cols-1'"
     >
       @for (song of popularSongs$ | async; track $index) {
 
@@ -46,7 +48,8 @@
   <article>
     <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">Happy songs</h2>
     <div
-      class="overflow-hidden grid gap-4 w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      class="overflow-hidden grid gap-4 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5"
+      [class]="sidebarService.collapsed ? 'grid-cols-2' : 'grid-cols-1'"
     >
       @for (song of popularSongs$ | async; track $index) {
 

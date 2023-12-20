@@ -7,7 +7,7 @@ import { SongCardComponent } from '../../components/song-card/song-card.componen
 import { UserService } from 'src/services/user.service';
 import { Playlist } from 'src/app/models/playlist';
 import { PlaylistService } from 'src/services/playlist.service';
-
+import { SidebarService } from 'src/services/sidebar.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -26,7 +26,8 @@ export class HomeComponent {
   constructor(
     private songService: SongService,
     private playlistService: PlaylistService,
-    public userService: UserService
+    public userService: UserService,
+    public sidebarService: SidebarService
   ) {}
 
   ngOnInit() {

@@ -111,6 +111,28 @@ export class SongCardComponent {
     );
   }
 
+  removeFromFavorites(songId: string) {
+    this.playlistService
+      .removeSong(this.favoritesPlaylist!.id, songId)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          this.inFavorites = of(false);
+        },
+        (error) => {
+          if (error.status == 403) {
+            console.log(`could not remove ${songId} from favorites`);
+            alert('This song is not in the playlist');
+          } else {
+            console.log(
+              `unknown error when trying to remove song from playlist`
+            );
+            alert('unknown error when trying to remove song from playlist');
+          }
+        }
+      );
+  }
+
   isInFavorites(songId: string) {
     if (this.favoritesPlaylist!.songs.some((song) => song.songId === songId)) {
       this.inFavorites = of(true);

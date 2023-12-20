@@ -2,8 +2,11 @@
 
 <main class="container mx-auto flex gap-2 mt-12">
   <app-sidebar></app-sidebar>
-  <!-- <app-home></app-home> -->
-  <div class="w-full h-full sm:mr-2">
+  <div
+    [class]="sidebarService.collapsed ? 'mr-2' : ''"
+    class="w-full h-full mb-16 sm:mb-0 sm:mr-2"
+  >
     <router-outlet></router-outlet>
   </div>
+  <app-navbar class="fixed bottom-0 left-0 right-0 sm:hidden"></app-navbar>
 </main>

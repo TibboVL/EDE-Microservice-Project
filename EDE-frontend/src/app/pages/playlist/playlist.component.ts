@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Playlist } from 'src/app/models/playlist';
 import { Observable, map } from 'rxjs';
@@ -22,6 +22,7 @@ import { SongService } from 'src/services/song.service';
 export class PlaylistComponent {
   playlist$: Observable<Playlist> = new Observable<Playlist>();
   private playlistId: string = '';
+  devMode: boolean = isDevMode();
 
   constructor(
     private playlistService: PlaylistService,

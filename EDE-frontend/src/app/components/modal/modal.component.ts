@@ -21,14 +21,6 @@ import { animate, style, transition, trigger } from '@angular/animations';
   host: {
     class: 'z-50',
   },
-  /*   animations: [
-    trigger('slideIn', [
-      transition(':enter', [
-        style({ opacity: 0, scale: 0.75 }),
-        animate('200ms ease-in', style({ opacity: 1, scale: 1 })),
-      ]),
-    ]),
-  ], */
 })
 export class ModalComponent {
   @Input() showModal: boolean = false;

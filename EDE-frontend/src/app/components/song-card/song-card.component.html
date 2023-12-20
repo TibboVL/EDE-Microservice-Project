@@ -10,13 +10,17 @@
       <button (click)="openModal(song.id)">
         <fa-icon icon="plus" class=""></fa-icon>
       </button>
-      <button (click)="addToFavorites(song.id)" class="heart-button">
-        @if (inFavorites | async) {
+      @if (inFavorites | async) {
+      <button (click)="removeFromFavorites(song.id)" class="heart-button">
         <fa-icon icon="heart" class="text-sky-600 heart-pop"></fa-icon>
-        } @else {
-        <fa-icon [icon]="['far', 'heart']" class="text-sky-600"></fa-icon>
-        }
       </button>
+      } @else {
+      <button (click)="addToFavorites(song.id)" class="heart-button">
+        <fa-icon
+          [icon]="['far', 'heart']"
+          class="text-sky-600"
+        ></fa-icon></button
+      >}
     </div>
   </header>
   <!-- <button (click)="delete(song.id)">DELETE</button> -->

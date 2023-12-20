@@ -11,6 +11,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { SidebarService } from 'src/services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,7 +38,8 @@ export class SidebarComponent {
 
   constructor(
     private playlistService: PlaylistService,
-    private userService: UserService
+    private userService: UserService,
+    public sidebarService: SidebarService
   ) {}
 
   ngOnInit() {

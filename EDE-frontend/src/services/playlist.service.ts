@@ -31,14 +31,17 @@ export class PlaylistService {
     });
   }
 
-  getPlaylist(playlistId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${playlistId}`, {
+  getPlaylist(playlistId: string): Observable<Playlist> {
+    return this.http.get<Playlist>(`${this.baseUrl}/${playlistId}`, {
       headers: this.getHeaders(),
     });
   }
 
-  updatePlaylist(playlistId: string, playlistRequest: any): Observable<any> {
-    return this.http.put<any>(
+  updatePlaylist(
+    playlistId: string,
+    playlistRequest: any
+  ): Observable<Playlist> {
+    return this.http.put<Playlist>(
       `${this.baseUrl}/${playlistId}`,
       playlistRequest,
       { headers: this.getHeaders() }
@@ -53,7 +56,7 @@ export class PlaylistService {
   }
 
   getMyFavoritesPlaylist(userId: string): Observable<Playlist> {
-    return this.http.post<any>(
+    return this.http.post<Playlist>(
       `${this.baseUrl}/${userId}`,
       {},
       {
@@ -63,7 +66,7 @@ export class PlaylistService {
   }
 
   getPlaylistFromUser(userId: string): Observable<Playlist[]> {
-    return this.http.get<any>(`${this.baseUrl}/user/${userId}`, {
+    return this.http.get<Playlist[]>(`${this.baseUrl}/user/${userId}`, {
       headers: this.getHeaders(),
     });
   }

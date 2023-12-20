@@ -8,6 +8,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
+import { SidebarService } from 'src/services/sidebar.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private oauthService: OAuthService, library: FaIconLibrary) {
+  constructor(
+    private oauthService: OAuthService,
+    library: FaIconLibrary,
+    public sidebarService: SidebarService
+  ) {
     library.addIconPacks(fas, far, fab);
   }
 
