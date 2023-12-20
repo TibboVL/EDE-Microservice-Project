@@ -106,4 +106,5 @@ This service manages user ratings for songs and podcast episodes.
 
 1. Zet de deployment docker-compose.yml om naar Kubernetes Manifest .yml-files (+5%)
 2. Gebruik ClusterIP & Nodeport op een logische manier (+5%)
+3. Maak een front-end voor je applicatie die niet gehost is op Okteto. (+15%)
 
