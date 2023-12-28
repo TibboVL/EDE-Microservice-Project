@@ -27,10 +27,13 @@
       ></fa-icon>
       }
     </div>
+    @if (!playlist.isFavorite) {
     <div class="flex gap-2 text-white">
       <!-- <button>Play</button> <button>Share</button> -->
       <button (click)="deletePlaylist()">Delete</button>
     </div>
+
+    }
 
     <div class="overflow-y-auto gap-4 w-full">
       @if (playlist.songs.length > 0) {
