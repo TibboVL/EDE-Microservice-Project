@@ -4,9 +4,8 @@ Welcome to the documentation for my Enterprise Development Experience repository
 
 ## Project theme
 
-My EDE project centers around a music service, featuring functionalities such as playlist management, song (and podcast)[^1] library maintenance, user registration, and ratings for songs (and podcast episodes)[^1]. The project's documentation illustrates the structure of the services, including their endpoints and operations.
+My EDE project centers around a music service, featuring functionalities such as playlist management, song library maintenance, user registration, and ratings for songs. The project's documentation illustrates the structure of the services, including their endpoints and operations.
 
-[^1]: Expansion.
 ## Services structure
 
 ![Project diagram](projectDiagram.png)
