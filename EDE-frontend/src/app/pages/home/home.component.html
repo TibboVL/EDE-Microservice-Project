@@ -4,7 +4,7 @@
     Good afternoon {{ (userService.user$ | async).username }}
   </h2>
 
-  @if (playlists$ | async ) {
+  @if (popularSongs$ | async ) {
   <article>
     <h2 class="text-blue-200 text-3xl mt-10 mb-7 mx-2">Popular</h2>
     <!-- 
