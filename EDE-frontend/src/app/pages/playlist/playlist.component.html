@@ -28,11 +28,13 @@
       }
     </div>
     <div class="flex gap-2 text-white">
-      <button>Play</button> <button>Share</button>
+      <!-- <button>Play</button> <button>Share</button> -->
       <button (click)="deletePlaylist()">Delete</button>
     </div>
 
     <div class="overflow-y-auto gap-4 w-full">
+      @if (playlist.songs.length > 0) {
+
       <table class="bg-slate-800 w-full p-4 text-left text-white rounded-lg">
         <tr class="w-full border-b border-white/50 text-white/50 [&>th]:p-2">
           <th class="text-center">#</th>
@@ -59,6 +61,13 @@
         </tr>
         }
       </table>
+      }@else {
+      <div class="bg-slate-800 w-full p-4 text-left text-white rounded-lg">
+        <p class="text-center font-semibold w-full">
+          This playlist has no songs yet?!
+        </p>
+      </div>
+      }
     </div>
   </div>
 </section>
