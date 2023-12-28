@@ -9,7 +9,6 @@ import {
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { UserService } from 'src/services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -41,8 +40,7 @@ export class NavComponent {
     @Inject(DOCUMENT) public document: Document,
 
     private oauthService: OAuthService,
-    public userService: UserService,
-    private router: Router
+    public userService: UserService
   ) {}
 
   ngOnInit() {

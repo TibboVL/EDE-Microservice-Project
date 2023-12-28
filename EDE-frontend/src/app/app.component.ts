@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { SongService } from '../services/song.service';
-import { Observable } from 'rxjs';
-import { Song } from './models/song';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
