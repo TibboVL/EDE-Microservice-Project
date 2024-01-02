@@ -22,13 +22,21 @@ data:
       - /etc/prometheus/prometheus.rules
     scrape_configs:
       - job_name: 'go-prometheus-monitoring'
-
         static_configs:
         - targets:
           - library-deployment:8082
           - library-service:8082
 
 ---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-global-read
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
 
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -41,6 +49,7 @@ spec:
       labels:
         app: prometheus
     spec:
+      serviceAccountName: prometheus  # Use the prometheus service account
       containers:
         - name: prometheus
           image: prom/prometheus:latest
@@ -59,10 +68,27 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
-  
         - name: prometheus-storage-volume
           emptyDir: {}
---- 
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: default
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-global-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-global-read
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: default
 
 apiVersion: v1
 kind: Service
@@ -79,4 +105,3 @@ spec:
     port: 9090
   selector:
     app: prometheus
-    
