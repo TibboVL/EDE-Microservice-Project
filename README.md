@@ -25,6 +25,7 @@ URL conversions:
 
 This centralized approach not only simplifies user interaction but also ensures that data security is maintained, guaranteeing that only authorized users can access the services.
 
+
 ### User service
 
 This service manages user-related operations, such as user registration, updating user information, and account deletion.
@@ -38,6 +39,7 @@ This service manages user-related operations, such as user registration, updatin
 | GET  | `/user/all` | Get all users (debugging).       | Yes            |
 | GET  | `/user/checkExistence/{id}` | Check if user exists in db (frontend)  | Yes            |
 | GET  | `/user/dummyData` | Add some dummy data (debugging).       | Yes            |
+
 
 ### Library service
 
@@ -64,6 +66,7 @@ The Library service uses the Rating service to retrieve the average rating when 
 | Mapping | Endpoint          | Uses   | Mapping | Endpoint |
 | ------- | ------------------ | ------ | -------- | ------------- |
 | GET     | `/song/{songId}`    | Uses      | GET     | `/rating/{songId}/average-rating` | When adding a song to a playlist, the service will ask the library service about its existence and some details about it.
+
 
 ### Playlist service
 
