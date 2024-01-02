@@ -94,10 +94,10 @@ This service manages user ratings for songs.
 
 | Mapping | Endpoints          | Comments                              | Requires Auth |
 | ------- | ------------------ | ------------------------------------- | ------------- |
-| POST    | - `/rating`        | Rate a song.       | Yes            |
-| GET     | - `/rating/{itemId}` | Retrieve ratings for a specific item. | Yes            |
-| PUT     | - `/rating/{itemId}` | Update a rating for an item.          | Yes            |
-| DELETE  | - `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
+| POST    | `/rating`        | Rate a song.       | Yes            |
+| GET     | `/rating/{itemId}` | Retrieve ratings for a specific item. | Yes            |
+| PUT     | `/rating/{itemId}` | Update a rating for an item.          | Yes            |
+| DELETE  | `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
 | GET  | `/rating/all` | Get all ratings (debugging).       | Yes            |
 
 
