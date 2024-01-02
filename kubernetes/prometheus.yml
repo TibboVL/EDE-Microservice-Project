@@ -56,7 +56,7 @@ data:
       - job_name: 'Services'
         metrics_path: /actuator/prometheus
         static_configs:
-          - targets: ['api-tibbovl.cloud.okteto.net:8080','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
+          - targets: ['api-tibbovl.cloud.okteto.net','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
       - job_name: 'Prometheus'
         metrics_path: /metrics
         static_configs:
