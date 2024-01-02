@@ -9,6 +9,13 @@ logging:
     reactor.netty: INFO
     org.springframework.security: TRACE
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
 spring:
   security:
     oauth2:

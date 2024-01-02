@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: tibbovl/api-gateway
+        image: tibbovl/api-gatewayv2:latest
         ports:
         - containerPort: 8080
         env:

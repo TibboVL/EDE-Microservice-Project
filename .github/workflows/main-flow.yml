@@ -25,10 +25,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/user-service:latest ./user-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/user-servicev2:latest ./user-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/user-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/user-servicev2:latest
   library-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver library-service container
@@ -77,10 +77,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/playlist-service:latest ./playlist-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/playlist-servicev2:latest ./playlist-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/playlist-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/playlist-servicev2:latest
   rating-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -103,10 +103,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/rating-service:latest ./rating-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/rating-servicev2:latest ./rating-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/rating-servicev2:latest
   api-gateway:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver api-gateway container
@@ -129,10 +129,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build --build-arg GOOGLE_CLIENTID=${{ secrets.GOOGLE_CLIENTID }} --build-arg GOOGLE_CLIENTSECRET=${{ secrets.GOOGLE_CLIENTSECRET }} -t ${{ secrets.DOCKER_USER }}/api-gateway:latest ./api-gateway
+        run: docker build --build-arg GOOGLE_CLIENTID=${{ secrets.GOOGLE_CLIENTID }} --build-arg GOOGLE_CLIENTSECRET=${{ secrets.GOOGLE_CLIENTSECRET }} -t ${{ secrets.DOCKER_USER }}/api-gatewayv2:latest ./api-gateway
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/api-gateway:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/api-gatewayv2:latest
 
         
 
