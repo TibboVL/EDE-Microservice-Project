@@ -21,10 +21,19 @@ spec:
         - containerPort: 9090
         env:
           - name: PROMETHEUS_CONFIG
-            valueFrom:
-              configMapKeyRef:
-                name: prometheus-config
-                key: prometheus.yml
+            value: |
+              global:
+                scrape_interval: 15s
+              
+              scrape_configs:
+                - job_name: 'example_app'
+                  static_configs:
+                    - targets:
+                        - 'localhost:8080'
+                        - 'localhost:8081'
+                        - 'localhost:8082'
+                        - 'localhost:8083'
+                        - 'localhost:8084'
 ---
 # expose api to world
 apiVersion: v1
@@ -54,4 +63,4 @@ data:
     scrape_configs:
       - job_name: 'example_app'
         static_configs:
-          - targets: ['localhost:8080','localhost:8081','localhost:8082','localhost:8083','localhost:8084']
+          - targets: ['localhost:9090','localhost:8080','localhost:8081','localhost:8082','localhost:8083','localhost:8084']
