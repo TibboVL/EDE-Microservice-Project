@@ -103,6 +103,11 @@ This service manages user ratings for songs.
 | DELETE  | `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
 | GET  | `/rating/all` | Get all ratings (debugging).       | Yes            |
 
+## Prometheus monitoring
+![PrometheusRequestCountGraph](PrometheusRequestCountGraph.png)
+![PrometheusLoadGraph](PrometheusLoadGraph.png)
+
+
 
 ## Postman tests
 
@@ -113,4 +118,5 @@ This service manages user ratings for songs.
 1. Zet de deployment docker-compose.yml om naar Kubernetes Manifest .yml-files (+5%)
 2. Gebruik ClusterIP & Nodeport op een logische manier (+5%)
 3. Maak een front-end voor je applicatie die niet gehost is op Okteto. (+15%)
-4. Mijn project bevat 4 services i.p.v. 3
+4. Zet monitoring op met Prometheus en demonstreer met screenshots. (+20%)
+5. Mijn project bevat 4 services i.p.v. 3
