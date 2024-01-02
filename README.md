@@ -13,7 +13,7 @@ My EDE project centers around a music service, featuring functionalities such as
 ### Gateway
 
 Serving as a link between various services, the gateway streamlines the user experience by converting specific service URLs to a unified format, reducing the complexity associated with managing multiple ports. It also plays a crucial role in enforcing a robust authentication system, ensuring secure access to the services, with the exception of specific exempted endpoints that are publicly accessible. 
-Examples of URL conversions:
+URL conversions:
 
 | Original URL                                    | Converted URL                              |
 | ---------------------------------------------- | ---------------------------------------- |
@@ -35,10 +35,13 @@ This service manages user-related operations, such as user registration, updatin
 | GET     | `/user/{userId}` | Retrieve user details by ID. | Yes            |
 | PUT     | `/user/{userId}` | Update user information.     | Yes            |
 | DELETE  | `/user/{userId}` | Delete a user account.       | Yes            |
+| GET  | `/user/all` | Get all users (debugging).       | Yes            |
+| GET  | `/user/checkExistence/{id}` | Check if user exists in db (frontend)  | Yes            |
+| GET  | `/user/dummyData` | Add some dummy data (debugging).       | Yes            |
 
 ### Library service
 
-The Library Service is responsible for managing music and podcast content, including adding, updating, and deleting songs and podcast episodes.
+The Library Service is responsible for managing music content, including adding, updating, and deleting songs.
 
 | Mapping | Endpoints                       | Comments                                   | Requires Auth |
 | --------- | ------------------------------- | ------------------------------------------ | ------------------- |
@@ -46,10 +49,9 @@ The Library Service is responsible for managing music and podcast content, inclu
 | GET       | `/song/{songId}`        | Retrieve song details by ID.               | No |
 | PUT       | `/song/{songId}`        | Update song information.                   | Yes |
 | DELETE    | `/song/{songId}`        | Delete a song from the library.            | Yes |
-<!---| POST      | `/library/podcasts`             | Add a new podcast episode to the library.  | Yes |
-| GET       | `/library/podcasts/{podcastId}` | Retrieve podcast episode details by ID.    | Yes |
-| PUT       | `/library/podcasts/{podcastId}` | Update podcast episode information.        | Yes |
-| DELETE    | `/library/podcasts/{podcastId}` | Delete a podcast episode from the library. | Yes |-->
+| GET  | `/song/all` | Get all songs (debugging).       | Yes            |
+| GET  | `/song/top/{count}` | Get a couple random songs (frontend).       | Yes            |
+| GET  | `/song/dummyData` | Add some dummy data (debugging).       | Yes            |
 
 The Library service uses the Playlist services hidden endpoint to update partial songs in case a song's information changes.
 
@@ -70,6 +72,7 @@ This service manages user playlists, allowing users to create, update, and delet
 | Mapping | Endpoints                         | Comments                   | Requires Auth |
 | --------- | --------------------------------- | -------------------------- | ------------------- |
 | POST      | `/playlist`                       | Create a new playlist.     | Yes |
+| POST      | `/playlist/{id}`                       | Create my favorites playlist.     | Yes |
 | GET       | `/playlist/{playlistId}`          | Get a playlist.            | No |
 | GET       | `/playlist/user/{userId}`         | Get a user's playlists.    | Yes |
 | PUT       | `/playlist/{playlistId}`          | Update playlist info.      | Yes |
@@ -87,14 +90,15 @@ The playlist service uses the library services get songs method when adding a so
 
 ### Rating service
 
-This service manages user ratings for songs and podcast episodes.
+This service manages user ratings for songs.
 
 | Mapping | Endpoints          | Comments                              | Requires Auth |
 | ------- | ------------------ | ------------------------------------- | ------------- |
-| POST    | - `/rating`        | Rate a song or podcast episode.       | Yes            |
+| POST    | - `/rating`        | Rate a song.       | Yes            |
 | GET     | - `/rating/{itemId}` | Retrieve ratings for a specific item. | Yes            |
 | PUT     | - `/rating/{itemId}` | Update a rating for an item.          | Yes            |
 | DELETE  | - `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
+| GET  | `/rating/all` | Get all ratings (debugging).       | Yes            |
 
 
 ## Postman tests
@@ -106,4 +110,4 @@ This service manages user ratings for songs and podcast episodes.
 1. Zet de deployment docker-compose.yml om naar Kubernetes Manifest .yml-files (+5%)
 2. Gebruik ClusterIP & Nodeport op een logische manier (+5%)
 3. Maak een front-end voor je applicatie die niet gehost is op Okteto. (+15%)
-
+4. Mijn project bevat 4 services i.p.v. 3
