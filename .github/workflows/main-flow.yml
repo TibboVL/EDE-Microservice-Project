@@ -51,10 +51,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/library-service:latest ./library-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/library-servicev2:latest ./library-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/library-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/library-servicev2:latest
   playlist-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver playlist-service container
