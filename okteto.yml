@@ -1,0 +1,167 @@
+name: EDE-Microservice-Project
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
+build:
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_API_GATEWAY_REGISTRY: image registry
+  #  - OKTETO_BUILD_API_GATEWAY_REPOSITORY: image repo
+  #  - OKTETO_BUILD_API_GATEWAY_IMAGE: image name
+  #  - OKTETO_BUILD_API_GATEWAY_SHA: image tag sha256
+  api-gateway:
+    context: api-gateway
+    dockerfile: api-gateway\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_LIBRARY_SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_LIBRARY_SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_LIBRARY_SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_LIBRARY_SERVICE_SHA: image tag sha256
+  library-service:
+    context: library-service
+    dockerfile: library-service\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_PLAYLIST_SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_PLAYLIST_SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_PLAYLIST_SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_PLAYLIST_SERVICE_SHA: image tag sha256
+  playlist-service:
+    context: playlist-service
+    dockerfile: playlist-service\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_RATING_SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_RATING_SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_RATING_SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_RATING_SERVICE_SHA: image tag sha256
+  rating-service:
+    context: rating-service
+    dockerfile: rating-service\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_USER_SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_USER_SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_USER_SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_USER_SERVICE_SHA: image tag sha256
+  user-service:
+    context: user-service
+    dockerfile: user-service\Dockerfile
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
+deploy:
+  - kubectl apply -f kubernetes
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  api-gateway:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 8080:8080
+    volumes:
+      - /root/.m2
+    sync:
+      - api-gateway:/usr/src/app
+  library-deployment:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 8082:8082
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  mongo-library:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 27017:27017
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  mongo-playlist:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 27017:27017
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  mongo-user:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 27017:27017
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  mysql-rating:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 3306:3306
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  playlist-deployment:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 8083:8083
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  prometheus-deployment:
+    image: okteto/maven:3
+    workdir: /prometheus
+    command: bash
+    forward:
+      - 5005:5005
+      - 9090:9090
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/prometheus
+  rating-deployment:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 8084:8084
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+  user-deployment:
+    image: okteto/maven:3
+    command: bash
+    forward:
+      - 5005:5005
+      - 8081:8081
+    volumes:
+      - /root/.m2
+    sync:
+      - .:/usr/src/app
+
