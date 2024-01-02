@@ -33,17 +33,32 @@ spec:
 #    configMap:
 #      name: prometheus-config
 ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+  # name: prometheus-service
+# spec:
+  # selector:
+    # app: prometheus
+  # ports:
+    # - protocol: TCP
+      # port: 80
+      # targetPort: 9090
+# expose api to world
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-service
+  name: prometheus-service # just rename to API later?
 spec:
   selector:
     app: prometheus
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 9090
+  - protocol: TCP
+    port: 80
+    targetPort: 9090
+    nodePort: 30008
+  type: NodePort
+
 ---
 apiVersion: v1
 kind: ConfigMap
