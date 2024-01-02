@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: library-deployment
-        image: tibbovl/library-servicev2:latest
+        image: tibbovl/library-servicev3:latest
         ports:
         - containerPort: 8082
         env:

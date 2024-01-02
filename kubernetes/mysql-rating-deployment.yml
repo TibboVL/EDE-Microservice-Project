@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: rating-deployment
-        image: tibbovl/rating-servicev2:latest
+        image: tibbovl/rating-servicev3:latest
         ports:
         - containerPort: 8084
         env:
