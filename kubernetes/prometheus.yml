@@ -54,9 +54,9 @@ data:
 
     scrape_configs:
       - job_name: 'Services'
-        metrics_path: /actuator/prometheus
+        metrics_path: /actuator
         static_configs:
-          - targets: ['localhost:8080','localhost:8081','library-service:8082','localhost:8083','localhost:8084']
+          - targets: ['api-gateway:8080','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
       - job_name: 'Prometheus'
         metrics_path: /metrics
         static_configs:
