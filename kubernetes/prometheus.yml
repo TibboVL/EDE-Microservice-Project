@@ -54,14 +54,6 @@ data:
 
     scrape_configs:
       - job_name: 'Services'
-        metrics_path: /actuator
-        static_configs:
-          - targets: ['api-gateway:8080','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
-      - job_name: 'Services test'
-        metrics_path: /actuator/health
-        static_configs:
-          - targets: ['api-gateway:8080','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
-      - job_name: 'Services test2'
         metrics_path: /actuator/prometheus
         static_configs:
           - targets: ['api-gateway:8080','user-service:8081','library-service:8082','playlist-service:8083','rating-service:8084']
