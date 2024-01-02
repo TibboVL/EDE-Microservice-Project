@@ -24,7 +24,7 @@ public class SecurityConfig {
         serverHttpSecurity
                 .csrf(csrfSpec -> csrfSpec.disable()) // Disable CSRF protection for frontend
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET, "/song/{id}", "/playlist/{id}")
+                        exchange.pathMatchers(HttpMethod.GET, "/song/{id}", "/playlist/{id}", "/actuator/prometheus")
                                 .permitAll()
                                 .anyExchange()
                                 .authenticated()
