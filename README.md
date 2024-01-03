@@ -124,16 +124,17 @@ Prometheus is availible on the endpoint [prometheus-service-tibbovl.cloud.okteto
 Hosted on Netlify: [ede-project.netlify.app](https://ede-project.netlify.app).
 ### Features
 
-Homepage: Displays five random songs, allowing easy exploration.
-
 User Authentication: Secure login for personalized features.
+
+Homepage: Displays a couple randomly selected songs.
+
+Playlist Creation: Create playlists with a name, optional description, and an optional public setting.
 
 Song Interaction:
 
 - Favorite Songs: 'Heart' songs to add them to favorites. Clicking a blue heart unlikes.
 - Add to Playlist: Plus icon adds songs to playlists.
 
-Playlist Creation: Create playlists with a name, optional description, and an optional public setting.
 
 ![Frontend Homepage](/assets/FrontendHomepage.png)
 ![Frontend Favorites](/assets/FrontendFavorites.png)
