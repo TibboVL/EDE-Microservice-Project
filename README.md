@@ -104,8 +104,11 @@ This service manages user ratings for songs.
 | GET  | `/rating/all` | Get all ratings (debugging).       | Yes            |
 
 ## Prometheus monitoring
-![PrometheusRequestCountGraph](PrometheusRequestCountGraph.png)
+
+This project utilizes Prometheus for monitoring and gathering metrics from various services. The Prometheus setup includes lots of data, but as example i set up visualizations of the average system load across different services and a detailed breakdown of HTTP secured requests per second, distinguishing between successful requests and those with errors.
+
 ![PrometheusLoadGraph](PrometheusLoadGraph.png)
+![PrometheusRequestCountGraph](PrometheusRequestCountGraph.png)
 
 
 
