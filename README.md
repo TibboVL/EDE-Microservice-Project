@@ -103,6 +103,13 @@ This service manages user ratings for songs.
 | DELETE  | `/rating/{itemId}` | Delete a rating for an item.          | Yes            |
 | GET  | `/rating/all` | Get all ratings (debugging).       | Yes            |
 
+
+## Postman tests
+
+I used Postman to make sure all the endpoints of my project were working as expected.
+
+![Postman tests](/assets/PostmanSummary.jpg)
+
 ## Prometheus monitoring
 
 This project utilizes Prometheus for monitoring and gathering metrics from various services. The Prometheus setup includes lots of data, but as example i set up visualizations of the average system load across different services and a detailed breakdown of HTTP secured requests per second, distinguishing between successful requests and those with errors.
@@ -112,12 +119,6 @@ Prometheus is availible on the endpoint [prometheus-service-tibbovl.cloud.okteto
 ![PrometheusTargetsStatus](/assets/PrometheusTargetsStatus.png)
 ![PrometheusLoadGraph](/assets/PrometheusLoadGraph.png)
 ![PrometheusRequestCountGraph](/assets/PrometheusRequestCountGraph.png)
-
-
-
-## Postman tests
-
-![Postman tests](/assets/PostmanSummary.jpg)
 
 ## Frontend
 
