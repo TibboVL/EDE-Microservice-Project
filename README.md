@@ -9,7 +9,7 @@ My EDE project centers around a music service, featuring functionalities such as
 ## Services structure
 
 ![Project diagram](/assets/projectDiagram.png)
-![Project diagram](/assets/EDE project.drawio.svg)
+![Project diagram](/assets/EDEproject.drawio.svg)
 
 ### Gateway
 
