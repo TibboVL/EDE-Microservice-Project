@@ -107,7 +107,7 @@ This service manages user ratings for songs.
 
 This project utilizes Prometheus for monitoring and gathering metrics from various services. The Prometheus setup includes lots of data, but as example i set up visualizations of the average system load across different services and a detailed breakdown of HTTP secured requests per second, distinguishing between successful requests and those with errors.
 
-Prometheus is availible on the endpoint `prometheus-service-tibbovl.cloud.okteto.net`
+Prometheus is availible on the endpoint [prometheus-service-tibbovl.cloud.okteto.net](prometheus-service-tibbovl.cloud.okteto.net).
 
 ![PrometheusTargetsStatus](/assets/PrometheusTargetsStatus.png)
 ![PrometheusLoadGraph](/assets/PrometheusLoadGraph.png)
@@ -121,7 +121,7 @@ Prometheus is availible on the endpoint `prometheus-service-tibbovl.cloud.okteto
 
 ## Frontend
 
-Hosted on Netlify: `ede-project.netlify.app`
+Hosted on Netlify: [ede-project.netlify.app](ede-project.netlify.app).
 ### Features
 
 Homepage: Displays five random songs, allowing easy exploration.
