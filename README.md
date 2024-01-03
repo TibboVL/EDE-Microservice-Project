@@ -119,6 +119,12 @@ Prometheus is availible on the endpoint `prometheus-service-tibbovl.cloud.okteto
 
 ![Postman tests](/assets/PostmanSummary.jpg)
 
+## Frontend
+
+![Frontend Homepage](/assets/FrontendHomepage.png)
+![Frontend Favorites](/assets/FrontendFavorites.png)
+
+
 ## My expansions
 
 1. Zet de deployment docker-compose.yml om naar Kubernetes Manifest .yml-files (+5%)
