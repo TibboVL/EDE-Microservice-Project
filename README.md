@@ -130,8 +130,8 @@ User Authentication: Secure login for personalized features.
 
 Song Interaction:
 
-    Favorite Songs: 'Heart' songs to add them to favorites. Clicking a blue heart unlikes.
-    Add to Playlist: Plus icon adds songs to playlists.
+- Favorite Songs: 'Heart' songs to add them to favorites. Clicking a blue heart unlikes.
+- Add to Playlist: Plus icon adds songs to playlists.
 
 Playlist Creation: Create playlists with a name, optional description, and an optional public setting.
 
