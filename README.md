@@ -109,14 +109,15 @@ This project utilizes Prometheus for monitoring and gathering metrics from vario
 
 Prometheus is availible on the endpoint `prometheus-service-tibbovl.cloud.okteto.net`
 
-![PrometheusLoadGraph](PrometheusLoadGraph.png)
-![PrometheusRequestCountGraph](PrometheusRequestCountGraph.png)
+![PrometheusTargetsStatus](/assets/PrometheusTargetsStatus.png)
+![PrometheusLoadGraph](/assets/PrometheusLoadGraph.png)
+![PrometheusRequestCountGraph](/assets/PrometheusRequestCountGraph.png)
 
 
 
 ## Postman tests
 
-![Postman tests](PostmanSummary.jpg)
+![Postman tests](/assets/PostmanSummary.jpg)
 
 ## My expansions
 
